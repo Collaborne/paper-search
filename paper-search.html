@@ -53,8 +53,8 @@
 			<iron-icon icon='search' class='icon'></iron-icon>
 			<input is='iron-input' id='input' bind-value={{query}} placeholder=[[placeholder]] class='flex' disabled=[[!_enabled]]></input>
 		</div>
-		<paper-icon-button icon='clear' hidden=[[!query]] on-tap='_tapClear' class='icon'></paper-icon-button>
-		<paper-icon-button id='filter' icon='image:tune' on-tap='_tapFilter' class='icon'></paper-icon-button>
+		<paper-icon-button icon='clear' hidden=[[!query]] on-tap='_clear' class='icon'></paper-icon-button>
+		<paper-icon-button id='filter' icon='image:tune' on-tap='_filter' class='icon'></paper-icon-button>
 		<paper-badge for='filter' label=[[nrSelectedFilters]] class='badge' hidden=[[!nrSelectedFilters]]></paper-badge>
 	</template>
 	         
@@ -71,7 +71,8 @@
 	    	/** Text for which the user is searching **/
 	    	query: {
 	    		type: String,
-	    		notify: true
+	    		notify: true,
+	    		value: ''
 	    	},
 	    	/** Number of filters the user has been selected (optional) */
 			nrSelectedFilters: {
@@ -80,7 +81,7 @@
 			},
 			placeholder: {
 				type: String,
-				value: "Search"
+				value: 'Search'
 			},
 
 			/** Text input box is only opened when the user clicks on it. This avoids auto-focusing in Cordova applications. */
@@ -103,10 +104,10 @@
 	    	this._enabled = true;
 			this.$.input.focus();
 	    },
-	    _tapFilter: function(e) {
+	    _filter: function(e) {
 	    	this.fire('paper-search-filter');
 	    },
-		_tapClear: function() {
+		_clear: function() {
 			this.query = "";
 			this.$.input.focus();
 		},
