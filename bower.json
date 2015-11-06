@@ -1,0 +1,27 @@
+{
+  "name": "paper-search",
+  "version": "1.0.0",
+  "authors": [
+    "collaborne"
+  ],
+  "description": "A Material Design search bar (Polymer 1.x)",
+  "main": "paper-search.html",
+  "keywords": [
+    "web-components",
+    "polymer",
+    "paper",
+    "material design",
+    "search",
+    "filter"
+  ],
+  "license": "Apache 2",
+  "homepage": "http://www.apache.org/licenses/LICENSE-2.0",
+  "ignore": [
+    "**/.*"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0",
+    "paper-styles": "PolymerElements/paper-styles#^1.0.0"
+  }
+}
