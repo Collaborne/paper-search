@@ -69,7 +69,10 @@
 
 	    properties: {
 	    	/** Text for which the user is searching **/
-	    	query: String,
+	    	query: {
+	    		type: String,
+	    		notify: true
+	    	},
 	    	/** Number of filters the user has been selected (optional) */
 			nrSelectedFilters: {
 				type: Number,
