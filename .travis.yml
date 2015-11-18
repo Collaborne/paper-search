@@ -3,7 +3,7 @@ sudo: false
 node_js:
   - stable
 addons:
-  firefox: latest
+  firefox: '42.0'
 
 before_script:
   - npm install web-component-tester
