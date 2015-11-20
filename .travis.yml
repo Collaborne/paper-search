@@ -9,5 +9,7 @@ before_script:
   - npm install web-component-tester
   - npm install bower
   - bower install
+  - npm install polylint
+  - polylint
 
 script: xvfb-run wct
