@@ -11,18 +11,18 @@ paper-search [![Bower version](https://badge.fury.io/bo/paper-search.svg)](http:
 `bower install paper-search`
 
 ```html
-<paper-search
+<paper-search-bar
   placeholder="Enter search term"
   nr-selected-filters="3"
   on-paper-search-search="search"
   on-paper-search-filter="filter"
-></paper-search>
+></paper-search-bar>
 ```
 
 
 ## Properties
 
-These properties are available for `paper-search`:
+These properties are available for `paper-search-bar`:
 
 Property              | Type   | Description
 --------------------- | ------ | ----------------------------
