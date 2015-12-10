@@ -1,0 +1,22 @@
+<html>
+	<head>
+	  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+		<link rel="import" href="../paper-search-bar.html">
+	</head>
+
+	<body>
+		<template is="dom-bind">
+			<paper-search-bar placeholder="Enter search term" nr-selected-filters="3" on-paper-search-search="search" on-paper-search-filter="filter"></paper-search-bar>
+		</template>
+
+		<script>
+			var scope = document.querySelector("template[is=dom-bind]");
+			scope.search = function() {
+				alert("Searching...");
+			};
+			scope.filter = function() {
+				alert("Filter dialog");
+			};
+		</script>
+	</body>
+</html>

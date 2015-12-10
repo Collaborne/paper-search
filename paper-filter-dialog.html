@@ -24,12 +24,12 @@
 		        @apply(--paper-filter-dialog);
 		        --paper-dialog-background-color: var(--paper-filter-dialog-background-color);
 			}
-			
+
 			paper-toolbar {
 				@apply(--paper-filter-toolbar);
 				--paper-toolbar-background: var(--paper-filter-toolbar-background);
 			}
-		
+
 			.dialog,.animated {
 				@apply(--layout-fit);
 			}
@@ -122,7 +122,7 @@
 		open: function() {
 			// Attach dialog to the body to ensure it's on top of all existing overlays
 			Polymer.dom(document.body).appendChild(this);
-			
+
 			this.$.dialog.open();
 
 			// @see https://github.com/PolymerElements/neon-animation/issues/60#issuecomment-152345020
@@ -143,7 +143,23 @@
 			this._redrawFilterValues();
 		},
 		_tapApply: function(e) {
-			this.fire('save');
+			// Extract the selected filters
+			var selectedFilters = {};
+			for (i = 0; i < this.filters.length; i++) {
+				var filter = this.filters[i];
+				var selectedValues = [];
+				for (j = 0; j < filter.values.length; j++) {
+					var value = filter.values[j];
+					if (value.selected) {
+						selectedValues.push(value.id);
+					}
+				}
+				if (selectedValues.length > 0) {
+					selectedFilters[filter.id] = selectedValues;
+				}
+			}
+
+			this.fire('save', selectedFilters);
 		},
 		_tapSelectValues: function(e) {
 			this.$.selector.deselect(this._selectedFilter);
@@ -158,7 +174,7 @@
 				if (typeof filter.values === 'undefined') {
 					return false;
 				}
-				
+
 				// Iterate until we find a filter value that is selected
 				return filter.values.some(function(value, index, array) {
 					return value.selected ? true : false;
@@ -170,7 +186,7 @@
 			if (typeof filter.values === 'undefined') {
 				return '';
 			}
-			
+
 			// Look up names
 			var names = [];
 			filter.values.forEach(function(value) {
