@@ -37,11 +37,13 @@
     "paper-item": "PolymerElements/paper-item#^1.0.0",
     "paper-checkbox": "PolymerElements/paper-checkbox#^1.0.0",
     "paper-spinner": "PolymerElements/paper-spinner#^1.0.0",
+    "paper-styles": "PolymerElements/paper-styles#^1.0.0",
     "neon-animation": "PolymerElements/neon-animation#^1.0.0",
-    "paper-styles": "PolymerElements/paper-styles#^1.0.0"
+    "paper-more-button": "Collaborne/paper-more-button#^1.0.0"
   },
   "devDependencies": {
     "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
+    "paper-toast": "PolymerElements/paper-toast#^1.0.0",
     "test-fixture": "PolymerElements/test-fixture#^1.0.0",
     "web-component-tester": "*",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"

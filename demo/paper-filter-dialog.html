@@ -1,20 +1,24 @@
 <html>
 	<head>
 	  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-		<link rel='import' href='../../paper-button/paper-button.html'>
+		<link rel="import" href="../../paper-button/paper-button.html">
 		<link rel="import" href="../paper-filter-dialog.html">
 	</head>
 
 	<body>
 		<template is="dom-bind">
 			<paper-button raised on-tap="open">Open</paper-button>
-			<paper-filter-dialog id="dialog" filters=[[filters]]></paper-filter-dialog>
+			<paper-filter-dialog id="dialog" filters=[[filters]] selected-filters={{selectedFilters}}></paper-filter-dialog>
 		</template>
 
 		<script>
 			var scope = document.querySelector("template[is=dom-bind]");
 			scope.open = function() {
 				this.$.dialog.open();
+			};
+			scope.selectedFilters = {
+				age: [ "teenager", "adult" ],
+				gender: [ "male" ]
 			};
 			scope.filters = [
 				{
@@ -29,14 +33,12 @@
 						{
 							id: "teenager",
 							name: "13-19",
-							count: 8,
-							selected: true
+							count: 8
 						},
 						{
 							id: "adult",
 							name: "20+",
-							count: 63,
-							selected: true
+							count: 63
 						}
 					]
 				},

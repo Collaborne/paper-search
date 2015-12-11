@@ -21,8 +21,8 @@
 
 		<style>
 			.dialog {
-		        @apply(--paper-filter-dialog);
-		        --paper-dialog-background-color: var(--paper-filter-dialog-background-color);
+		    @apply(--paper-filter-dialog);
+		    --paper-dialog-background-color: var(--paper-filter-dialog-background-color);
 			}
 
 			paper-toolbar {
@@ -52,7 +52,7 @@
 		</style>
 
 		<paper-dialog id='dialog' class='dialog' entry-animation='fade-in-animation' exit-animation='fade-out-animation'>
-			<array-selector id='selector' items={{filters}} selected={{_selectedFilter}}></array-selector>
+			<array-selector id='selector' items={{_filtersWithSelection}} selected={{_selectedFilter}}></array-selector>
 
 			<neon-animated-pages class='animated' selected=[[_getSelectedPage(_selectedFilter)]] entry-animation='fade-in-animation' exit-animation='fade-out-animation'>
 				<neon-animatable>
@@ -60,11 +60,11 @@
 					  	<paper-toolbar>
 					      <paper-icon-button dialog-dismiss icon='close'></paper-icon-button>
 					      <span class='title'></span>
-					      <paper-button on-tap='_tapReset' class='reset' hidden=[[!_hasSelectedFilters(filters,_forceRedrawDummy)]]>Reset</paper-button>
+					      <paper-button on-tap='_tapReset' class='reset' hidden=[[!_hasSelectedFilters(_filtersWithSelection,_forceRedrawDummy)]]>Reset</paper-button>
 								<paper-button on-tap='_tapApply' dialog-confirm>Save filters</paper-button>
 					    </paper-toolbar>
 
-						<iron-list id='filtersList' items=[[filters]] as='filter' class='lister'>
+						<iron-list id='filtersList' items=[[_filtersWithSelection]] as='filter' class='lister'>
 							<template>
 								<paper-item class='filter' on-tap='_tapSelectFilter'>
 									<paper-item-body two-line>
@@ -110,7 +110,17 @@
 		is: 'paper-filter-dialog',
 		properties: {
 			filters: Array,
+			selectedFilters: {
+				type: Object,
+				notify: true,
+				value: {}
+			},
 
+			// Combined filters with the select property
+			_filtersWithSelection: {
+				type: Array,
+				value: []
+			},
 			_selectedFilter: Object,
 			_forceRedrawDummy: {
 				type: Number,
@@ -120,6 +130,23 @@
 
 		// Public methods
 		open: function() {
+			// Recalculate the filters based on selection property. For performance optimization this is only done
+			// if the dialog is shown.
+			var _filtersWithSelection = this.filters;
+			_filtersWithSelection.forEach(function(filter) {
+				var filterId = filter.id;
+				// Ignore if the filter doesn't have values or if the filter is not selected
+				if (!this.selectedFilters.hasOwnProperty(filterId) || !filter.hasOwnProperty('values')) {
+					return;
+				}
+
+				filter.values.forEach(function(value) {
+					value.selected = this.selectedFilters[filterId].indexOf(value.id) >= 0;
+				}.bind(this));
+			}.bind(this));
+			// Minimize triggering data binding updates
+			this._filtersWithSelection = _filtersWithSelection;
+
 			// Attach dialog to the body to ensure it's on top of all existing overlays
 			Polymer.dom(document.body).appendChild(this);
 
@@ -135,7 +162,7 @@
 			this.$.selector.select(e.model.filter);
 		},
 		_tapReset: function(e) {
-			this.filters.forEach(function(filter) {
+			this._filtersWithSelection.forEach(function(filter) {
 				filter.values.forEach(function(value) {
 					value.selected = false;
 				});
@@ -145,8 +172,8 @@
 		_tapApply: function(e) {
 			// Extract the selected filters
 			var selectedFilters = {};
-			for (i = 0; i < this.filters.length; i++) {
-				var filter = this.filters[i];
+			for (i = 0; i < this._filtersWithSelection.length; i++) {
+				var filter = this._filtersWithSelection[i];
 				var selectedValues = [];
 				for (j = 0; j < filter.values.length; j++) {
 					var value = filter.values[j];
@@ -159,7 +186,8 @@
 				}
 			}
 
-			this.fire('save', selectedFilters);
+			this.selectedFilters = selectedFilters;
+			this.fire('save');
 		},
 		_tapSelectValues: function(e) {
 			this.$.selector.deselect(this._selectedFilter);
@@ -168,9 +196,9 @@
 		},
 
 		// Returns if any filters were selected
-		_hasSelectedFilters(filters, _forceRedrawDummy) {
+		_hasSelectedFilters(_filtersWithSelection, _forceRedrawDummy) {
 			// Iterate until we find a filter that is selected
-			return this.filters.some(function(filter, index, array) {
+			return this._filtersWithSelection.some(function(filter, index, array) {
 				if (typeof filter.values === 'undefined') {
 					return false;
 				}

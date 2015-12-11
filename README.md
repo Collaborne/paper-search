@@ -1,9 +1,11 @@
 paper-search [![Bower version](https://badge.fury.io/bo/paper-search.svg)](http://badge.fury.io/bo/paper-search)
 =========
 
-`paper-search` provides a Material Design [search](https://www.google.com/design/spec/patterns/search.html). The web component is built with [Polymer 1.x](https://www.polymer-project.org).
+`paper-search` provides components for a Material Design [search](https://www.google.com/design/spec/patterns/search.html). The web components are built with [Polymer 1.x](https://www.polymer-project.org).
 
-![Screenshot](/doc/screenshot.png "Screenshot")
+![Screenshot: Panel](/doc/search-panel-screenshot.png "Screenshot: Panel")
+![Screenshot: Filter dialog - filters](/doc/filter-dialog-filters-screenshot.png "Screenshot: Filter dialog - filters")
+![Screenshot: Filter dialog - values](/doc/filter-dialog-values-screenshot.png "Screenshot: Filter dialog - values")
 
 
 ## Usage
@@ -11,12 +13,17 @@ paper-search [![Bower version](https://badge.fury.io/bo/paper-search.svg)](http:
 `bower install paper-search`
 
 ```html
-<paper-search-bar
-  placeholder="Enter search term"
-  nr-selected-filters="3"
-  on-paper-search-search="search"
-  on-paper-search-filter="filter"
-></paper-search-bar>
+<paper-search-panel
+  search={{search}}
+  count={{count}}
+  items=[[items]]
+  has-more=[[hasMore]]
+  loading=[[loading]]
+  filters=[[filters]]
+  selected-filters={{selectedFilters}}
+  on-change-request-params="loadData">
+  Show your [[count]] results for "[[search]]"
+</paper-search-panel>
 ```
 
 
