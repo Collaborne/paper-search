@@ -213,7 +213,7 @@
 		// Returns the concated names of the selected values for a specific filter
 		_getSelectedValuesNames: function(filter, _forceRedrawDummy) {
 			if (typeof filter.values === 'undefined') {
-				return '';
+				return 'No filters yet';
 			}
 
 			// Look up names
@@ -224,6 +224,10 @@
 					names.push(value.name);
 				}
 			});
+			
+			if (names.length === 0) {
+				return 'No filters yet';
+			}
 
 			return names.join(', ');
 		},
