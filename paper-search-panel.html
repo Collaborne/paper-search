@@ -98,10 +98,13 @@
 		_showNoResults: function(_hasItems, loading) {
 			return !_hasItems && !loading;
 		},
-		_onChangeRequest: function() {
-			// Set back to default to avoid endless listers
-			this.count = 20;
-			this._updateData();
+		_onChangeRequest: function(newValue, oldValue) {
+			// Ignore initial setting of properties (caller is supposed to trigger this call automatically)
+			if (typeof oldValue !== 'undefined') {
+				// Set back to default to avoid endless listers
+				this.count = 20;
+				this._updateData();
+			}
 		},
 		_updateData: function() {
 			this.fire('change-request-params');
