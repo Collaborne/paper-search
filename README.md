@@ -1,4 +1,4 @@
-paper-search [![Bower version](https://badge.fury.io/bo/paper-search.svg)](http://badge.fury.io/bo/paper-search)
+paper-search [![Bower version](https://badge.fury.io/bo/paper-search.svg)](http://badge.fury.io/bo/paper-search) [![Travis state](https://travis-ci.org/Collaborne/paper-search.svg?branch=master)](https://travis-ci.org/Collaborne/paper-search)
 =========
 
 `paper-search` provides components for a Material Design [search](https://www.google.com/design/spec/patterns/search.html). The web components are built with [Polymer 1.x](https://www.polymer-project.org).
