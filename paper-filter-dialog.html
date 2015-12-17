@@ -61,7 +61,7 @@
 					  	<paper-toolbar>
 					    	<paper-icon-button dialog-dismiss icon='close'></paper-icon-button>
 					    	<span class='title'></span>
-					    	<paper-button on-tap='_tapReset' class='reset' hidden=[[!_hasSelectedFilters(filters,_forceRedrawDummy)]]>Reset</paper-button>
+					    	<paper-button on-tap='_tapReset' class='reset' hidden=[[!_hasSelectedFilters(_selectedFilters,_forceRedrawDummy)]]>Reset</paper-button>
 							<paper-button on-tap='_tapApply' dialog-confirm>Save filters</paper-button>
 					    </paper-toolbar>
 
@@ -186,18 +186,15 @@
 		},
 
 		// Returns if any filters were selected
-		_hasSelectedFilters(filters, _forceRedrawDummy) {
+		_hasSelectedFilters(_selectedFilters, _forceRedrawDummy) {
 			// Iterate until we find a filter that is selected
-			return filters.some(function(filter, index, array) {
-				if (typeof filter.values === 'undefined') {
-					return false;
+			for (selectedFilter in _selectedFilters) {
+				if (selectedFilter.length > 0) {
+					return true;
 				}
+			}
 
-				// Iterate until we find a filter value that is selected
-				return filter.values.some(function(value, index, array) {
-					return value.selected ? true : false;
-				});
-			});
+			return false;
 		},
 		// Returns the concated names of the selected values for a specific filter
 		_getSelectedValuesNames: function(filter,_selectedFilters,_forceRedrawDummy) {
