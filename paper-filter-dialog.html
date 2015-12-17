@@ -53,7 +53,7 @@
 		</style>
 
 		<paper-dialog id='dialog' class='dialog' entry-animation='fade-in-animation' exit-animation='fade-out-animation'>
-			<array-selector id='selector' items={{_filtersWithSelection}} selected={{_selectedFilter}}></array-selector>
+			<array-selector id='selector' items={{filters}} selected={{_selectedFilter}}></array-selector>
 
 			<neon-animated-pages class='animated' selected=[[_getSelectedPage(_selectedFilter)]] entry-animation='fade-in-animation' exit-animation='fade-out-animation'>
 				<neon-animatable>
@@ -61,16 +61,16 @@
 					  	<paper-toolbar>
 					    	<paper-icon-button dialog-dismiss icon='close'></paper-icon-button>
 					    	<span class='title'></span>
-					    	<paper-button on-tap='_tapReset' class='reset' hidden=[[!_hasSelectedFilters(_filtersWithSelection,_forceRedrawDummy)]]>Reset</paper-button>
+					    	<paper-button on-tap='_tapReset' class='reset' hidden=[[!_hasSelectedFilters(filters,_forceRedrawDummy)]]>Reset</paper-button>
 							<paper-button on-tap='_tapApply' dialog-confirm>Save filters</paper-button>
 					    </paper-toolbar>
 
-						<iron-list id='filtersList' items=[[_filtersWithSelection]] as='filter' class='lister'>
+						<iron-list id='filtersList' items=[[filters]] as='filter' class='lister'>
 							<template>
 								<paper-item class='filter' on-tap='_tapSelectFilter'>
 									<paper-item-body two-line>
 										<div class='name'>[[filter.name]]</div>
-										<div secondary>[[_getSelectedValuesNames(filter,_forceRedrawDummy)]]</div>
+										<div secondary>[[_getSelectedValuesNames(filter,_selectedFilters,_forceRedrawDummy)]]</div>
 									</paper-item-body>
 								</paper-item>
 							</template>
@@ -79,16 +79,16 @@
 				</neon-animatable>
 
 				<neon-animatable>
-		    	<paper-header-panel mode='seamed'>
-				    <paper-toolbar>
-			      	<paper-icon-button icon='arrow-back' on-tap='_tapSelectValues'></paper-icon-button>
-			      	<span class='title'>[[_selectedFilter.name]]</span>
+			    	<paper-header-panel mode='seamed'>
+					    <paper-toolbar>
+					    	<paper-icon-button icon='arrow-back' on-tap='_tapSelectValues'></paper-icon-button>
+						    <span class='title'>[[_selectedFilter.name]]</span>
 						</paper-toolbar>
 
-						<iron-list id='valuesList' items=[[_selectedFilter.values]] as='filterValue'>
+						<iron-list id='valuesList' items=[[_selectedFilter.values]] as='filterValue' selection-enabled multi-selection>
 							<template>
 								<paper-item class='entry'>
-									<paper-checkbox name=[[filterValue.id]] checked={{filterValue.selected}}></paper-checkbox>
+									<paper-checkbox name=[[filterValue.id]] checked={{selected}}></paper-checkbox>
 									<div>
 										[[filterValue.name]]
 										<span class='nrResults' hidden=[[!filterValue.count]]>([[filterValue.count]])</span>
@@ -117,11 +117,8 @@
 				value: {}
 			},
 
-			// Combined filters with the select property
-			_filtersWithSelection: {
-				type: Array,
-				value: []
-			},
+			// Internal copy that is changed. Copied back to original variable only once the user clicks on [Apply]
+			_selectedFilters: Object,
 			_selectedFilter: Object,
 			_forceRedrawDummy: {
 				type: Number,
@@ -131,27 +128,19 @@
 
 		// Public methods
 		open: function() {
-			// Recalculate the filters based on selection property. For performance optimization this is only done
-			// if the dialog is shown.
-			var _filtersWithSelection = this.filters;
-			_filtersWithSelection.forEach(function(filter) {
-				var filterId = filter.id;
-				// Ignore if the filter doesn't have values or if the filter is not selected
-				if (!this.selectedFilters.hasOwnProperty(filterId) || !filter.hasOwnProperty('values')) {
-					return;
-				}
-
-				filter.values.forEach(function(value) {
-					value.selected = this.selectedFilters[filterId].indexOf(value.id) >= 0;
-				}.bind(this));
-			}.bind(this));
-			// Minimize triggering data binding updates
-			this._filtersWithSelection = _filtersWithSelection;
-
 			// Attach dialog to the body to ensure it's on top of all existing overlays
 			Polymer.dom(document.body).appendChild(this);
 
 			this.$.dialog.open();
+
+			// Clone selected filters, so it can be changed without touching the external property
+			this._selectedFilters = {};
+			for (var selectedFilterId in this.selectedFilters) {
+				this._selectedFilters[selectedFilterId] = this.selectedFilters[selectedFilterId];
+			}
+
+			// Redraw filters in case they are still here from a formerly filtering attempt that was cancelled
+			this._redrawFilterValues();
 
 			// @see https://github.com/PolymerElements/neon-animation/issues/60#issuecomment-152345020
 			this.$.filtersList.fire('iron-resize');
@@ -161,45 +150,45 @@
 		// Actions
 		_tapSelectFilter: function(e) {
 			this.$.selector.select(e.model.filter);
+
+			// Pre-select options
+			var selectedValueIds = this._selectedFilters[this._selectedFilter.id];
+			if (typeof selectedValueIds !== 'undefined') {
+				this.$.valuesList.clearSelection();
+				this._selectedFilter.values.forEach(function(value) {
+					if (selectedValueIds.indexOf(value.id) >= 0) {
+						// Value is selected
+						this.$.valuesList.selectItem(value);
+					}
+				}.bind(this));
+			}
 		},
 		_tapReset: function(e) {
-			this._filtersWithSelection.forEach(function(filter) {
-				filter.values.forEach(function(value) {
-					value.selected = false;
-				});
-			});
+			this._selectedFilters = {};
 			this._redrawFilterValues();
 		},
 		_tapApply: function(e) {
-			// Extract the selected filters
-			var selectedFilters = {};
-			for (i = 0; i < this._filtersWithSelection.length; i++) {
-				var filter = this._filtersWithSelection[i];
-				var selectedValues = [];
-				for (j = 0; j < filter.values.length; j++) {
-					var value = filter.values[j];
-					if (value.selected) {
-						selectedValues.push(value.id);
-					}
-				}
-				if (selectedValues.length > 0) {
-					selectedFilters[filter.id] = selectedValues;
-				}
-			}
+			this.selectedFilters = this._selectedFilters;
 
-			this.selectedFilters = selectedFilters;
 			this.fire('save');
 		},
 		_tapSelectValues: function(e) {
+			// Captured selected valuesList
+			var selectedValues = [];
+			this.$.valuesList.selectedItems.forEach(function(selectedItem) {
+				selectedValues.push(selectedItem.id);
+			});
+			this._selectedFilters[this._selectedFilter.id] = selectedValues;
+
 			this.$.selector.deselect(this._selectedFilter);
 
 			this._redrawFilterValues();
 		},
 
 		// Returns if any filters were selected
-		_hasSelectedFilters(_filtersWithSelection, _forceRedrawDummy) {
+		_hasSelectedFilters(filters, _forceRedrawDummy) {
 			// Iterate until we find a filter that is selected
-			return this._filtersWithSelection.some(function(filter, index, array) {
+			return filters.some(function(filter, index, array) {
 				if (typeof filter.values === 'undefined') {
 					return false;
 				}
@@ -211,8 +200,9 @@
 			});
 		},
 		// Returns the concated names of the selected values for a specific filter
-		_getSelectedValuesNames: function(filter, _forceRedrawDummy) {
-			if (typeof filter.values === 'undefined') {
+		_getSelectedValuesNames: function(filter,_selectedFilters,_forceRedrawDummy) {
+			var selectedValueIds = _selectedFilters[filter.id];
+			if (typeof filter.values === 'undefined' || typeof selectedValueIds === 'undefined') {
 				return 'No filters yet';
 			}
 
@@ -220,7 +210,7 @@
 			var names = [];
 			filter.values.forEach(function(value) {
 				// Add names of values that are selected
-				if (value.selected) {
+				if (selectedValueIds.indexOf(value.id) >= 0) {
 					names.push(value.name);
 				}
 			});
