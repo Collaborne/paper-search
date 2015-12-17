@@ -118,7 +118,10 @@
 			},
 
 			// Internal copy that is changed. Copied back to original variable only once the user clicks on [Apply]
-			_selectedFilters: Object,
+			_selectedFilters: {
+				type: Object,
+				value: {}
+			},
 			_selectedFilter: Object,
 			_forceRedrawDummy: {
 				type: Number,
@@ -151,9 +154,12 @@
 		_tapSelectFilter: function(e) {
 			this.$.selector.select(e.model.filter);
 
-			// Pre-select options
+			this._preselectFilterValues();
+		},
+		// Pre-select selected filter values
+		_preselectFilterValues: function() {
 			var selectedValueIds = this._selectedFilters[this._selectedFilter.id];
-			if (typeof selectedValueIds !== 'undefined') {
+			if (typeof selectedValueIds !== 'undefined' && typeof this._selectedFilter.values !== 'undefined') {
 				this.$.valuesList.clearSelection();
 				this._selectedFilter.values.forEach(function(value) {
 					if (selectedValueIds.indexOf(value.id) >= 0) {
@@ -189,7 +195,7 @@
 		_hasSelectedFilters(_selectedFilters, _forceRedrawDummy) {
 			// Iterate until we find a filter that is selected
 			for (selectedFilter in _selectedFilters) {
-				if (selectedFilter.length > 0) {
+				if (_selectedFilters[selectedFilter].length > 0) {
 					return true;
 				}
 			}
@@ -197,7 +203,7 @@
 			return false;
 		},
 		// Returns the concated names of the selected values for a specific filter
-		_getSelectedValuesNames: function(filter,_selectedFilters,_forceRedrawDummy) {
+		_getSelectedValuesNames: function(filter, _selectedFilters, _forceRedrawDummy) {
 			var selectedValueIds = _selectedFilters[filter.id];
 			if (typeof filter.values === 'undefined' || typeof selectedValueIds === 'undefined') {
 				return 'No filters yet';
