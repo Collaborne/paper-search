@@ -9,6 +9,9 @@
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../paper-styles/paper-styles.html">
 
+<!--
+Bar in which the user can enter search terms and filter
+-->
 <dom-module id="paper-search-bar">
 
 	<template>
@@ -68,23 +71,32 @@
 		is: 'paper-search-bar',
 
 	    properties: {
-	    	/** Text for which the user is searching **/
+	    	/**
+	    	 * Text for which the user is searching
+	    	 */
 	    	query: {
 	    		type: String,
 	    		notify: true,
 	    		value: ''
 	    	},
-	    	/** Number of filters the user has been selected (optional) */
+	    	/**
+	    	 * Number of filters the user has been selected (shown in the badge) (optional)
+	    	 */
 			nrSelectedFilters: {
 				type: Number,
 				value: 0
 			},
+			/**
+			 * Text shown in the search box if the user didn't enter any query
+			 */
 			placeholder: {
 				type: String,
 				value: 'Search'
 			},
 
-			/** Text input box is only opened when the user clicks on it. This avoids auto-focusing in Cordova applications. */
+			/**
+			 * Text input box is only opened when the user clicks on it. This avoids auto-focusing in Cordova applications.
+			 */
 			_enabled: {
 				type: Boolean,
 				value: false

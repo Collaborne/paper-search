@@ -4,6 +4,26 @@
 <link rel="import" href="paper-search-bar.html">
 <link rel="import" href="paper-filter-dialog.html">
 
+<!--
+Panel with a search bar and filtering dialog.
+
+### Example
+
+```html
+<paper-search-panel
+  search={{search}}
+  count={{count}}
+  items=[[items]]
+  has-more=[[hasMore]]
+  loading=[[loading]]
+  filters=[[filters]]
+  selected-filters={{selectedFilters}}
+  on-change-request-params="loadData">
+  Show your [[count]] results for "[[search]]"
+</paper-search-panel>
+```
+
+-->
 <dom-module id="paper-search-panel">
 
 	<template>

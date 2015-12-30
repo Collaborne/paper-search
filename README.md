@@ -1,3 +1,6 @@
+_[Demo and API Docs](http://collaborne.github.io/paper-search)_
+
+
 paper-search [![Bower version](https://badge.fury.io/bo/paper-search.svg)](http://badge.fury.io/bo/paper-search) [![Travis state](https://travis-ci.org/Collaborne/paper-search.svg?branch=master)](https://travis-ci.org/Collaborne/paper-search)
 =========
 
@@ -16,34 +19,9 @@ Screenshot: Select values from Filtering Dialog
 ![Screenshot: Filter dialog - values](/doc/filter-dialog-values-screenshot.png "Screenshot: Filter dialog - values")
 
 
-## Usage
+To use these elements:
 
 `bower install paper-search`
-
-```html
-<paper-search-panel
-  search={{search}}
-  count={{count}}
-  items=[[items]]
-  has-more=[[hasMore]]
-  loading=[[loading]]
-  filters=[[filters]]
-  selected-filters={{selectedFilters}}
-  on-change-request-params="loadData">
-  Show your [[count]] results for "[[search]]"
-</paper-search-panel>
-```
-
-
-## Properties
-
-These properties are available for `paper-search-bar`:
-
-Property              | Type   | Description
---------------------- | ------ | ----------------------------
-**query**             | String | Search query entered by the user
-**nrSelectedFilters** | Number | Number of selected filters (shown in the badge)
-**placeholder**       | String | Text shown in the search box if the user didn't enter any query
 
 
 ## License
