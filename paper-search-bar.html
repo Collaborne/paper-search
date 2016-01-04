@@ -25,7 +25,7 @@ Bar in which the user can enter search terms and filter
 				@apply(--layout-horizontal);
 				@apply(--layout-center);
 			}
-			
+
 			.input-panel {
 				@apply(--layout-horizontal);
 				@apply(--layout-center);
@@ -34,16 +34,16 @@ Bar in which the user can enter search terms and filter
 			.icon {
 				color: var(--disabled-text-color);
 			}
-						
+
 			#input {
 				margin: 0 10px;
 				border: 0;
 			}
-			
+
 			#input[disabled] {
 				background: var(--background-color, white);
 			}
-			
+
 			.badge {
 				--paper-badge-background: var(--paper-red-500);
 				--paper-badge-opacity: 1;
@@ -55,14 +55,14 @@ Bar in which the user can enter search terms and filter
 		</style>
 
 		<div class='input-panel flex' on-tap='_enable'>
-			<iron-icon icon='search' class='icon'></iron-icon>
+			<iron-icon icon=[[icon]] class='icon'></iron-icon>
 			<input is='iron-input' id='input' bind-value={{query}} placeholder=[[placeholder]] class='flex' disabled=[[!_enabled]]></input>
 		</div>
 		<paper-icon-button icon='clear' hidden=[[!query]] on-tap='_clear' class='icon'></paper-icon-button>
 		<paper-icon-button id='filter' icon='image:tune' on-tap='_filter' class='icon'></paper-icon-button>
 		<paper-badge for='filter' label=[[nrSelectedFilters]] class='badge' hidden=[[!nrSelectedFilters]]></paper-badge>
 	</template>
-	         
+
 </dom-module>
 
 <script>
@@ -89,6 +89,13 @@ Bar in which the user can enter search terms and filter
 				value: 0
 			},
 			/**
+			 * Icon shown in the search background
+			 */
+			icon: {
+				type: String,
+				value: 'search'
+			},
+			/**
 			 * Text shown in the search box if the user didn't enter any query
 			 */
 			placeholder: {
@@ -104,7 +111,7 @@ Bar in which the user can enter search terms and filter
 				value: false
 			}
 	    },
-		
+
 	    behaviors: [
    			Polymer.IronA11yKeysBehavior
    	    ],
@@ -127,7 +134,7 @@ Bar in which the user can enter search terms and filter
 		},
 		_search: function() {
 			this._enabled = false;
-			
+
 	    	this.fire('paper-search-search');
 		}
 	});

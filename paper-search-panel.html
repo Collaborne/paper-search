@@ -54,7 +54,7 @@ Panel with a search bar and filtering dialog.
 			}
 		</style>
 
-		<paper-search-bar class='search' query={{search}} nr-selected-filters=[[_getNrSelectedFilters(selectedFilters)]] on-paper-search-search='_onSearch' on-paper-search-filter='_onFilter'></paper-search-bar>
+		<paper-search-bar class='search' icon=[[icon]] query={{search}} nr-selected-filters=[[_getNrSelectedFilters(selectedFilters)]] on-paper-search-search='_onSearch' on-paper-search-filter='_onFilter'></paper-search-bar>
 		<paper-filter-dialog id='filterDialog' filters=[[filters]] selected-filters={{selectedFilters}}></paper-filter-dialog>
 
 		<div hidden=[[!_hasItems]]>
@@ -98,6 +98,13 @@ Panel with a search bar and filtering dialog.
 				type: Number,
 				notify: true,
 				value: 20
+			},
+			/**
+			 * Icon shown in the search background
+			 */
+			icon: {
+				type: String,
+				value: 'search'
 			},
 
 			_hasItems: {
