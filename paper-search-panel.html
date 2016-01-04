@@ -54,7 +54,7 @@ Panel with a search bar and filtering dialog.
 			}
 		</style>
 
-		<paper-search-bar class='search' icon=[[icon]] query={{search}} nr-selected-filters=[[_getNrSelectedFilters(selectedFilters)]] on-paper-search-search='_onSearch' on-paper-search-filter='_onFilter'></paper-search-bar>
+		<paper-search-bar class='search' icon=[[icon]] placeholder=[[placeholder]] query={{search}} nr-selected-filters=[[_getNrSelectedFilters(selectedFilters)]] on-paper-search-search='_onSearch' on-paper-search-filter='_onFilter'></paper-search-bar>
 		<paper-filter-dialog id='filterDialog' filters=[[filters]] selected-filters={{selectedFilters}}></paper-filter-dialog>
 
 		<div hidden=[[!_hasItems]]>
@@ -105,6 +105,13 @@ Panel with a search bar and filtering dialog.
 			icon: {
 				type: String,
 				value: 'search'
+			},
+			/**
+			 * Text shown in the search box if the user didn't enter any query
+			 */
+			placeholder: {
+				type: String,
+				value: 'Search'
 			},
 
 			_hasItems: {

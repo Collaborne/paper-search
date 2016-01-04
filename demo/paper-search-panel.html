@@ -15,7 +15,7 @@
 	<body>
 		<template is="dom-bind">
 			<h2>Search panel</h2>
-			<paper-search-panel search={{search}} count={{count}} items=[[_createItems(noResults)]] has-more=[[hasMore]] loading=[[loading]] filters=[[filters]] selected-filters={{selectedFilters}} on-change-request-params="loadData">
+			<paper-search-panel placeholder="Search for anything..." search={{search}} count={{count}} items=[[_createItems(noResults)]] has-more=[[hasMore]] loading=[[loading]] filters=[[filters]] selected-filters={{selectedFilters}} on-change-request-params="loadData">
 				Your job: Show your [[count]] results for "[[search]]"
 			</paper-search-panel>
 
