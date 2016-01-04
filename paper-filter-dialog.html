@@ -115,7 +115,13 @@ Dialog with which the user can filter the result set
 	Polymer({
 		is: 'paper-filter-dialog',
 		properties: {
+			/**
+			 * All filters from which the user can choose
+			 */
 			filters: Array,
+			/**
+			 * All filters that have been selected by the user, e.g. `{ age: [ "child", "teen" ] }`
+			 */
 			selectedFilters: {
 				type: Object,
 				notify: true,
@@ -137,6 +143,9 @@ Dialog with which the user can filter the result set
 		},
 
 		// Public methods
+		/**
+		 * Opens the filter dialog
+		 */
 		open: function() {
 			// Attach dialog to the body to ensure it's on top of all existing overlays
 			Polymer.dom(document.body).appendChild(this);

@@ -76,24 +76,45 @@ Panel with a search bar and filtering dialog.
 	Polymer({
 		is: 'paper-search-panel',
 		properties: {
+			/**
+			 * Query for which the user was searching
+			 */
 			search: {
 				type: String,
 				observer: '_onChangeRequest',
 				notify: true
 			},
+			/**
+			 * All filters from which the user can choose
+			 */
 			filters: Object,
+			/**
+			 * All filters that have been selected by the user, e.g. `{ age: [ "child", "teen" ] }`
+			 */
 			selectedFilters: {
 				type: Object,
 				observer: '_onChangeRequest',
 				notify: true,
 				value: {}
 			},
+			/**
+			 * Items that are currently shown in the lister
+			 */
 			items: Array,
+			/**
+			 * True if further items could be loaded
+			 */
 			hasMore: Boolean,
+			/**
+			 * True if items are currently loaded
+			 */
 			loading: {
 				type: Boolean,
 				value: false
 			},
+			/**
+			 * Number of items loaded per page (i.e. for each click on [more])
+			 */
 			count: {
 				type: Number,
 				notify: true,
