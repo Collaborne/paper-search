@@ -1,16 +1,17 @@
-# Version 1.0.1
+# Version 1.0.2
 language: node_js
 sudo: false
 node_js:
   - stable
 addons:
   firefox: '42.0'
+cache:
+  directories:
+    - node_modules
 
 before_script:
-  - npm install web-component-tester
-  - npm install bower
+  - npm install web-component-tester bower polylint
   - bower install
-  - npm install polylint
   - polylint
   - export PATH=$PWD/node_modules/.bin:$PATH
 
