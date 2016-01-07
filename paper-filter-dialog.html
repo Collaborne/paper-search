@@ -150,7 +150,10 @@ Dialog with which the user can filter the result set
 			// Attach dialog to the body to ensure it's on top of all existing overlays
 			Polymer.dom(document.body).appendChild(this);
 
-			this.$.dialog.open();
+			// Wait until dialog is added to the DOM (required for Safari)
+			setTimeout(function() {
+				this.$.dialog.open();
+			}.bind(this), 1);
 
 			// Clone selected filters, so it can be changed without touching the external property
 			this._selectedFilters = {};
