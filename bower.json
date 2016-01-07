@@ -36,6 +36,7 @@
     "paper-toolbar": "PolymerElements/paper-toolbar#^1.0.0",
     "paper-item": "PolymerElements/paper-item#^1.0.0",
     "paper-checkbox": "PolymerElements/paper-checkbox#^1.0.0",
+    "paper-ripple": "PolymerElements/paper-ripple#^1.0.0",
     "paper-spinner": "PolymerElements/paper-spinner#^1.0.0",
     "paper-styles": "PolymerElements/paper-styles#^1.0.0",
     "neon-animation": "PolymerElements/neon-animation#^1.0.0",

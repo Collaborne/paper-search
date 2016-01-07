@@ -73,6 +73,7 @@ Dialog with which the user can filter the result set
 						<iron-list id='filtersList' items=[[filters]] as='filter' class='lister'>
 							<template>
 								<paper-item class='filter' on-tap='_tapSelectFilter'>
+									<paper-ripple fit></paper-ripple>
 									<paper-item-body two-line>
 										<div class='name'>[[filter.name]]</div>
 										<div secondary>[[_getSelectedValuesNames(filter,_selectedFilters,_forceRedrawDummy)]]</div>
