@@ -153,20 +153,20 @@ Dialog with which the user can filter the result set
 			// Wait until dialog is added to the DOM (required for Safari)
 			setTimeout(function() {
 				this.$.dialog.open();
+
+				// Clone selected filters, so it can be changed without touching the external property
+				this._selectedFilters = {};
+				for (var selectedFilterId in this.selectedFilters) {
+					this._selectedFilters[selectedFilterId] = this.selectedFilters[selectedFilterId];
+				}
+
+				// Redraw filters in case they are still here from a formerly filtering attempt that was cancelled
+				this._redrawFilterValues();
+
+				// @see https://github.com/PolymerElements/neon-animation/issues/60#issuecomment-152345020
+				this.$.filtersList.fire('iron-resize');
+				this.$.valuesList.fire('iron-resize');
 			}.bind(this), 1);
-
-			// Clone selected filters, so it can be changed without touching the external property
-			this._selectedFilters = {};
-			for (var selectedFilterId in this.selectedFilters) {
-				this._selectedFilters[selectedFilterId] = this.selectedFilters[selectedFilterId];
-			}
-
-			// Redraw filters in case they are still here from a formerly filtering attempt that was cancelled
-			this._redrawFilterValues();
-
-			// @see https://github.com/PolymerElements/neon-animation/issues/60#issuecomment-152345020
-			this.$.filtersList.fire('iron-resize');
-			this.$.valuesList.fire('iron-resize');
 		},
 
 		// Actions
