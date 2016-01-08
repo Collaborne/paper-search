@@ -30,14 +30,17 @@
 						element = fixture('TrivialElement');
 					});
 
-					test('selected filters are passed on open', function() {
+					test('selected filters are passed on open', function(done) {
 						// Pre-condition: no filters selected internally
 						element._selectedFilters = {};
 
 						element.selectedFilters = { age: [ 'adult'] };
 						element.open();
 
-						expect(Object.keys(element._selectedFilters).length).to.be.eql(1);
+						setTimeout(function() {
+							expect(Object.keys(element._selectedFilters).length).to.be.eql(1);
+							done();
+						}, 10);
 					});
 					test('reset clears all selected filters', function() {
 						// Pre-condition: age filter is selected
