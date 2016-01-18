@@ -75,6 +75,18 @@ Panel with a search bar and filtering dialog.
 
 	Polymer({
 		is: 'paper-search-panel',
+
+		/**
+		 * Fired when the user changes the parameter defining the currently shown items
+		 *
+		 * @event change-request-params
+		 */
+		 /**
+		 * Fired when the user requests to search for a query
+		 *
+		 * @event search
+		 */
+
 		properties: {
 			/**
 			 * Query for which the user was searching
