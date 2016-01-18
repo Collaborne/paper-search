@@ -73,18 +73,18 @@ Bar in which the user can enter search terms and filter
 	Polymer({
 		is: 'paper-search-bar',
 
-	    properties: {
-	    	/**
-	    	 * Text for which the user is searching
-	    	 */
-	    	query: {
-	    		type: String,
-	    		notify: true,
-	    		value: ''
-	    	},
-	    	/**
-	    	 * Number of filters the user has been selected (shown in the badge) (optional)
-	    	 */
+		properties: {
+			/**
+			 * Text for which the user is searching
+			 */
+			query: {
+				type: String,
+				notify: true,
+				value: ''
+			},
+			/**
+			 * Number of filters the user has been selected (shown in the badge) (optional)
+			 */
 			nrSelectedFilters: {
 				type: Number,
 				value: 0
@@ -111,24 +111,24 @@ Bar in which the user can enter search terms and filter
 				type: Boolean,
 				value: false
 			}
-	    },
+		},
 
-	    behaviors: [
+		behaviors: [
    			Polymer.IronA11yKeysBehavior
-   	    ],
+   		],
 
 		keyBindings: {
 			'enter': '_search'
 		},
 
-	    // Private methods
-	    _enable: function(e) {
-	    	this._enabled = true;
+		// Private methods
+		_enable: function(e) {
+			this._enabled = true;
 			this.$.input.focus();
-	    },
-	    _filter: function(e) {
-	    	this.fire('paper-search-filter');
-	    },
+		},
+		_filter: function(e) {
+			this.fire('paper-search-filter');
+		},
 		_clear: function() {
 			this.query = "";
 			this.$.input.focus();
@@ -136,7 +136,7 @@ Bar in which the user can enter search terms and filter
 		_search: function() {
 			this._enabled = false;
 
-	    	this.fire('paper-search-search');
+			this.fire('paper-search-search');
 		}
 	});
 
