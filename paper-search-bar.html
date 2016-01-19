@@ -55,13 +55,13 @@ Bar in which the user can enter search terms and filter
 			}
 		</style>
 
-		<div class='input-panel flex' on-tap='_enable'>
-			<iron-icon icon=[[icon]] class='icon'></iron-icon>
-			<input is='iron-input' id='input' bind-value={{query}} placeholder=[[placeholder]] class='flex' disabled=[[!_enabled]]></input>
+		<div class="input-panel flex" on-tap="_enable">
+			<iron-icon icon=[[icon]] class="icon"></iron-icon>
+			<input is="iron-input" id="input" bind-value={{query}} placeholder=[[placeholder]] class="flex" disabled=[[!_enabled]]></input>
 		</div>
-		<paper-icon-button icon='clear' hidden=[[!query]] on-tap='_clear' class='icon'></paper-icon-button>
-		<paper-icon-button id='filter' icon='image:tune' on-tap='_filter' class='icon'></paper-icon-button>
-		<paper-badge for='filter' label=[[nrSelectedFilters]] class='badge' hidden=[[!nrSelectedFilters]]></paper-badge>
+		<paper-icon-button icon="clear" hidden=[[!query]] on-tap="_clear" class="icon"></paper-icon-button>
+		<paper-icon-button id="filter" icon="image:tune" on-tap="_filter" class="icon"></paper-icon-button>
+		<paper-badge for="filter" label=[[nrSelectedFilters]] class="badge" hidden=[[!nrSelectedFilters]]></paper-badge>
 	</template>
 
 </dom-module>

@@ -54,17 +54,17 @@ Panel with a search bar and filtering dialog.
 			}
 		</style>
 
-		<paper-search-bar class='search' icon=[[icon]] placeholder=[[placeholder]] query={{search}} nr-selected-filters=[[_getNrSelectedFilters(selectedFilters)]] on-paper-search-search='_onSearch' on-paper-search-filter='_onFilter'></paper-search-bar>
-		<paper-filter-dialog id='filterDialog' filters=[[filters]] selected-filters={{selectedFilters}}></paper-filter-dialog>
+		<paper-search-bar class="search" icon=[[icon]] placeholder=[[placeholder]] query={{search}} nr-selected-filters=[[_getNrSelectedFilters(selectedFilters)]] on-paper-search-search="_onSearch" on-paper-search-filter="_onFilter"></paper-search-bar>
+		<paper-filter-dialog id="filterDialog" filters=[[filters]] selected-filters={{selectedFilters}}></paper-filter-dialog>
 
 		<div hidden=[[!_hasItems]]>
 			<content></content>
 		</div>
 
-		<div hidden=[[!_showNoResults(_hasItems,loading)]] class='noResults'>No matching results found.</div>
+		<div hidden=[[!_showNoResults(_hasItems,loading)]] class="noResults">No matching results found.</div>
 
-		<div class='more'>
-			<paper-more-button has-more=[[hasMore]] loading=[[loading]] on-tap-more='_loadMore'>More</paper-more-button>
+		<div class="more">
+			<paper-more-button has-more=[[hasMore]] loading=[[loading]] on-tap-more="_loadMore">More</paper-more-button>
 		</div>
 	</template>
 </dom-module>
