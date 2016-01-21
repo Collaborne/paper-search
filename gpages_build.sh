@@ -1,5 +1,5 @@
-#!/bin/sh -x
-# Version 1.0.1
+#!/bin/sh
+# Version 1.0.2
 #
 # Modified to work with Travis CI automated builds
 # Original license follows
@@ -32,7 +32,7 @@ branch=${3:-"master"} # default to master when branch isn't specified
 
 # make folder (same as input, no checking!)
 if [ -n "${GH_TOKEN}" ]; then
-	repo_url=git://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+	repo_url=https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
 else
 	repo_url=git://github.com/${TRAVIS_REPO_SLUG}.git
 fi
