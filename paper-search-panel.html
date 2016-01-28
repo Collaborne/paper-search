@@ -56,16 +56,22 @@ Panel with a search bar and filtering dialog.
 		</style>
 
 		<paper-search-bar class="search" icon="[[icon]]" placeholder="[[placeholder]]" query="{{search}}" nr-selected-filters="[[_getNrSelectedFilters(selectedFilters)]]" on-paper-search-search="_onSearch" on-paper-search-filter="_onFilter"></paper-search-bar>
-		<paper-filter-dialog id="filterDialog" filters="[[filters]]" selected-filters="{{selectedFilters}}"></paper-filter-dialog>
+		<paper-filter-dialog
+			id="filterDialog"
+			filters="[[filters]]"
+			selected-filters="{{selectedFilters}}"
+			reset-button=[[resetButton]]
+			save-button=[[saveButton]]>
+		</paper-filter-dialog>
 
 		<div hidden="[[!_hasItems]]">
 			<content></content>
 		</div>
 
-		<div hidden="[[!_showNoResults(_hasItems,loading)]]" class="noResults">No matching results found.</div>
+		<div hidden="[[!_showNoResults(_hasItems,loading)]]" class="noResults">[[noResultsText]]</div>
 
 		<div class="more">
-			<paper-more-button has-more="[[hasMore]]" loading="[[loading]]" on-tap-more="_loadMore">More</paper-more-button>
+			<paper-more-button has-more="[[hasMore]]" loading="[[loading]]" on-tap-more="_loadMore">[[moreButton]]</paper-more-button>
 		</div>
 	</template>
 </dom-module>
@@ -147,6 +153,32 @@ Panel with a search bar and filtering dialog.
 				type: String,
 				value: 'Search'
 			},
+
+			/**
+			 * Text shown if no results are found. Use this property to localize the element.
+			 */
+			noResultsText: {
+				type: String,
+				value: 'No matching results found.'
+			},
+
+			/**
+			 * Text for the more button to load more data. Use this property to localize the element.
+			 */
+			moreButton: {
+				type: String,
+				value: 'More'
+			},
+
+			/**
+			 * Text for the reset button in the filter dialog. Use this property to localize the element.
+			 */
+			resetButton: String,
+
+			/**
+			 * Text for the save button in the filter dialog. Use this property to localize the element.
+			 */
+			saveButton: String,
 
 			_hasItems: {
 				type: Boolean,

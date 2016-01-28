@@ -67,8 +67,8 @@ Dialog with which the user can filter the result set
 					  	<paper-toolbar>
 					    	<paper-icon-button dialog-dismiss icon="close"></paper-icon-button>
 					    	<span class="title"></span>
-					    	<paper-button on-tap="_tapReset" class="reset" hidden="[[!_hasSelectedFilters(_selectedFilters,_forceRedrawDummy)]]">Reset</paper-button>
-							<paper-button on-tap="_tapApply" dialog-confirm>Save filters</paper-button>
+					    	<paper-button on-tap="_tapReset" class="reset" hidden="[[!_hasSelectedFilters(_selectedFilters,_forceRedrawDummy)]]">[[resetButton]]</paper-button>
+							<paper-button on-tap="_tapApply" dialog-confirm>[[saveButton]]</paper-button>
 					    </paper-toolbar>
 
 						<iron-list id="filtersList" items="[[filters]]" as="filter" class="lister">
@@ -135,6 +135,22 @@ Dialog with which the user can filter the result set
 				type: Object,
 				notify: true,
 				value: {}
+			},
+
+			/**
+			 * Text for the reset button. Use this property to localize the element.
+			 */
+			resetButton: {
+				type: String,
+				value: 'Reset'
+			},
+
+			/**
+			 * Text for the save button. Use this property to localize the element.
+			 */
+			saveButton: {
+				type: String,
+				value: 'Save filters'
 			},
 
 			/**
