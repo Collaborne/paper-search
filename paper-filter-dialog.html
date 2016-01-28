@@ -1,3 +1,4 @@
+<!doctype html>
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
@@ -58,19 +59,19 @@ Dialog with which the user can filter the result set
 		</style>
 
 		<paper-dialog id="dialog" class="dialog" entry-animation="fade-in-animation" exit-animation="fade-out-animation">
-			<array-selector id="selector" items={{filters}} selected={{_selectedFilter}}></array-selector>
+			<array-selector id="selector" items="{{filters}}" selected="{{_selectedFilter}}"></array-selector>
 
-			<neon-animated-pages class="animated" selected=[[_getSelectedPage(_selectedFilter)]] entry-animation="fade-in-animation" exit-animation="fade-out-animation">
+			<neon-animated-pages class="animated" selected="[[_getSelectedPage(_selectedFilter)]]" entry-animation="fade-in-animation" exit-animation="fade-out-animation">
 				<neon-animatable>
 					<paper-header-panel mode="seamed">
 					  	<paper-toolbar>
 					    	<paper-icon-button dialog-dismiss icon="close"></paper-icon-button>
 					    	<span class="title"></span>
-					    	<paper-button on-tap="_tapReset" class="reset" hidden=[[!_hasSelectedFilters(_selectedFilters,_forceRedrawDummy)]]>Reset</paper-button>
+					    	<paper-button on-tap="_tapReset" class="reset" hidden="[[!_hasSelectedFilters(_selectedFilters,_forceRedrawDummy)]]">Reset</paper-button>
 							<paper-button on-tap="_tapApply" dialog-confirm>Save filters</paper-button>
 					    </paper-toolbar>
 
-						<iron-list id="filtersList" items=[[filters]] as="filter" class="lister">
+						<iron-list id="filtersList" items="[[filters]]" as="filter" class="lister">
 							<template>
 								<paper-item class="filter" on-tap="_tapSelectFilter">
 									<paper-ripple fit></paper-ripple>
@@ -91,13 +92,13 @@ Dialog with which the user can filter the result set
 						    <span class="title">[[_selectedFilter.name]]</span>
 						</paper-toolbar>
 
-						<iron-list id="valuesList" items=[[_selectedFilter.values]] as="filterValue" selection-enabled multi-selection>
+						<iron-list id="valuesList" items="[[_selectedFilter.values]]" as="filterValue" selection-enabled multi-selection>
 							<template>
 								<paper-item class="entry">
-									<paper-checkbox name=[[filterValue.id]] checked={{selected}}></paper-checkbox>
+									<paper-checkbox name="[[filterValue.id]]" checked="{{selected}}"></paper-checkbox>
 									<div>
 										[[filterValue.name]]
-										<span class="nrResults" hidden=[[!filterValue.count]]>([[filterValue.count]])</span>
+										<span class="nrResults" hidden="[[!filterValue.count]]">([[filterValue.count]])</span>
 									</div>
 								</paper-item>
 							</template>
