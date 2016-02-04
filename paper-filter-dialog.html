@@ -236,7 +236,7 @@ Dialog with which the user can filter the result set
 		},
 
 		// Returns if any filters were selected
-		_hasSelectedFilters(_selectedFilters, _forceRedrawDummy) {
+		_hasSelectedFilters: function(_selectedFilters, _forceRedrawDummy) {
 			// Iterate until we find a filter that is selected
 			for (selectedFilter in _selectedFilters) {
 				if (_selectedFilters[selectedFilter].length > 0) {
