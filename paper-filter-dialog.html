@@ -71,8 +71,8 @@ Dialog with which the user can filter the result set
 							<paper-button on-tap="_tapApply" dialog-confirm>[[saveButton]]</paper-button>
 					    </paper-toolbar>
 
-						<iron-list id="filtersList" items="[[filters]]" as="filter" class="lister">
-							<template>
+						<div class="lister">
+							<template is="dom-repeat" items="[[filters]]" as="filter">
 								<paper-item class="filter" on-tap="_tapSelectFilter">
 									<paper-ripple fit></paper-ripple>
 									<paper-item-body two-line>
@@ -81,7 +81,7 @@ Dialog with which the user can filter the result set
 									</paper-item-body>
 								</paper-item>
 							</template>
-						</iron-list>
+						</div>
 					</paper-header-panel>
 				</neon-animatable>
 
@@ -189,7 +189,6 @@ Dialog with which the user can filter the result set
 				this._redrawFilterValues();
 
 				// @see https://github.com/PolymerElements/neon-animation/issues/60#issuecomment-152345020
-				this.$.filtersList.fire('iron-resize');
 				this.$.valuesList.fire('iron-resize');
 			}.bind(this), 1);
 		},
