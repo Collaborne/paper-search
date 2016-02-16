@@ -1,5 +1,5 @@
 #!/bin/sh
-# Version 1.0.2
+# Version 1.0.3
 #
 # Modified to work with Travis CI automated builds
 # Original license follows
@@ -36,11 +36,24 @@ if [ -n "${GH_TOKEN}" ]; then
 else
 	repo_url=git://github.com/${TRAVIS_REPO_SLUG}.git
 fi
+
+filter_gh_token() {
+	if [ -n "${GH_TOKEN}" ]; then
+		sed -e "s,${GH_TOKEN},*****,g" >&2
+	else
+		cat
+	fi
+}
+
+log() {
+	echo "$1" | filter_gh_token >&2
+}
+
 workdir=${repo}.$$
 trap "rm -rf ${workdir}" EXIT
 git clone ${repo_url} --no-checkout --single-branch ${workdir}
 if [ $? -ne 0 ]; then
-	echo "Cannot checkout gh-pages branch from ${repo_url}" >&2
+	log "Cannot checkout gh-pages branch from ${repo_url}"
 	exit 1
 fi
 
@@ -73,6 +86,10 @@ create_gh_pages() {
 	git add -A .
 	git commit -am 'Deploy to GitHub Pages'
 	git push --force --quiet -u ${repo_url} gh-pages > /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		log "Cannot push new gh-pages branch to ${repo_url}"
+		exit 1
+	fi
 }
 
 (cd ${workdir} >/dev/null && create_gh_pages)
