@@ -64,11 +64,11 @@ Panel with a search bar and filtering dialog.
 			save-button="[[saveButton]]">
 		</paper-filter-dialog>
 
-		<div hidden="[[!_hasItems]]">
+		<div hidden$="[[!_hasItems]]">
 			<content></content>
 		</div>
 
-		<div hidden="[[!_showNoResults(_hasItems,loading)]]" class="noResults">[[noResultsText]]</div>
+		<div hidden$="[[!_showNoResults(_hasItems,loading)]]" class="noResults">[[noResultsText]]</div>
 
 		<div class="more">
 			<paper-more-button has-more="[[hasMore]]" loading="[[loading]]" on-tap-more="_loadMore">[[moreButton]]</paper-more-button>
