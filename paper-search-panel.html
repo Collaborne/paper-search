@@ -70,7 +70,7 @@ Panel with a search bar and filtering dialog.
 
 		<div hidden$="[[!_showNoResults(_hasItems,loading)]]" class="noResults">[[noResultsText]]</div>
 
-		<div class="more">
+		<div class="more" hidden$="[[!hasMore]]">
 			<paper-more-button has-more="[[hasMore]]" loading="[[loading]]" on-tap-more="_loadMore">[[moreButton]]</paper-more-button>
 		</div>
 	</template>
