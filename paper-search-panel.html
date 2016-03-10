@@ -61,7 +61,8 @@ Panel with a search bar and filtering dialog.
 			filters="[[filters]]"
 			selected-filters="{{selectedFilters}}"
 			reset-button="[[resetButton]]"
-			save-button="[[saveButton]]">
+			save-button="[[saveButton]]"
+			no-values-label="[[noValuesLabel]]">
 		</paper-filter-dialog>
 
 		<div hidden$="[[!_hasItems]]">
@@ -179,6 +180,11 @@ Panel with a search bar and filtering dialog.
 			 * Text for the save button in the filter dialog. Use this property to localize the element.
 			 */
 			saveButton: String,
+
+			/**
+			 * Label shown if no values are selected for a filter. Use this property to localize the element.
+			 */
+			noValuesLabel: String,
 
 			_hasItems: {
 				type: Boolean,

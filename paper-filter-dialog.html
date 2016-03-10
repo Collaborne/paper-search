@@ -154,6 +154,14 @@ Dialog with which the user can filter the result set
 			},
 
 			/**
+			 * Label shown if no values are selected for a filter. Use this property to localize the element.
+			 */
+			noValuesLabel: {
+				type: String,
+				value: 'No filters yet'
+			},
+
+			/**
 			 * Internal copy that is changed. Copied back to original variable only once the user clicks on [Apply]
 			 */
 			_selectedFilters: {
@@ -253,7 +261,7 @@ Dialog with which the user can filter the result set
 		_getSelectedValuesNames: function(filter, _selectedFilters, _forceRedrawDummy) {
 			var selectedValueIds = _selectedFilters[filter.id];
 			if (typeof filter.values === 'undefined' || typeof selectedValueIds === 'undefined') {
-				return 'No filters yet';
+				return this.noValuesLabel;
 			}
 
 			// Look up names
@@ -266,7 +274,7 @@ Dialog with which the user can filter the result set
 			});
 
 			if (names.length === 0) {
-				return 'No filters yet';
+				return this.noValuesLabel;
 			}
 
 			return names.join(', ');
