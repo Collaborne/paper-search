@@ -43,7 +43,7 @@ Panel with a search bar and filtering dialog.
 				text-align: center;
 			}
 
-			#filterDialog {
+			.filter-dialog {
 				--paper-filter-dialog-background-color: #eee;
 				--paper-filter-toolbar-background: var(--paper-grey-200);
 				--paper-filter-dialog: {
@@ -58,6 +58,7 @@ Panel with a search bar and filtering dialog.
 		<paper-search-bar class="search" icon="[[icon]]" placeholder="[[placeholder]]" query="{{search}}" nr-selected-filters="[[_getNrSelectedFilters(selectedFilters)]]" on-paper-search-search="_onSearch" on-paper-search-filter="_onFilter"></paper-search-bar>
 		<paper-filter-dialog
 			id="filterDialog"
+			class="filter-dialog"
 			filters="[[filters]]"
 			selected-filters="{{selectedFilters}}"
 			reset-button="[[resetButton]]"
