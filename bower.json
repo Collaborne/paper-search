@@ -13,7 +13,7 @@
     "search",
     "filter"
   ],
-  "license": "Apache 2",
+  "license": "Apache-2.0",
   "homepage": "https://github.com/collaborne/paper-search",
   "ignore": [
     "**/.*"
