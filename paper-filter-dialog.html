@@ -69,9 +69,9 @@ Dialog with which the user can filter the result set
 				<neon-animatable>
 					<paper-header-panel mode="seamed">
 					  	<paper-toolbar>
-					    	<paper-icon-button on-tap="close" icon="close"></paper-icon-button>
-					    	<span class="title"></span>
-						<paper-button on-tap="_tapReset" class="reset" hidden$="[[!_hasSelectedFilters(_selectedFilters,_forceRedrawDummy)]]">[[resetButton]]</paper-button>
+							<paper-icon-button on-tap="close" icon="close"></paper-icon-button>
+							<span class="title"></span>
+							<paper-button on-tap="_tapReset" class="reset" hidden$="[[!_hasSelectedFilters(_selectedFilters,_forceRedrawDummy)]]">[[resetButton]]</paper-button>
 							<paper-button on-tap="_tapApply" dialog-confirm>[[saveButton]]</paper-button>
 					    </paper-toolbar>
 
