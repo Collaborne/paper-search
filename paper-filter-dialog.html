@@ -45,7 +45,7 @@ Dialog with which the user can filter the result set
 				margin: 0;
 			}
 
-			.lister,.entry {
+			.filters,.value {
 				background: white;
 			}
 
@@ -53,7 +53,7 @@ Dialog with which the user can filter the result set
 				border-bottom: 1px solid var(--divider-color);
 			}
 
-			.filter,.entry {
+			.filter,.value {
 				cursor: pointer;
 			}
 
@@ -75,7 +75,7 @@ Dialog with which the user can filter the result set
 							<paper-button on-tap="_tapApply" dialog-confirm>[[saveButton]]</paper-button>
 					    </paper-toolbar>
 
-						<div class="lister">
+						<div class="filters">
 							<template is="dom-repeat" items="[[filters]]" as="filter">
 								<paper-item class="filter" on-tap="_tapSelectFilter">
 									<paper-ripple fit></paper-ripple>
@@ -98,7 +98,7 @@ Dialog with which the user can filter the result set
 
 						<iron-list id="valuesList" items="[[_selectedFilter.values]]" as="filterValue" selection-enabled multi-selection>
 							<template>
-								<paper-item class="entry">
+								<paper-item class="value">
 									<paper-checkbox name="[[filterValue.id]]" checked="{{selected}}"></paper-checkbox>
 									<div>
 										[[filterValue.name]]
