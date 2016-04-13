@@ -33,6 +33,7 @@
 			<div class="vertical-section">
 				<paper-checkbox class="property" checked="{{noResults}}">Empty results</paper-checkbox><br>
 				<paper-checkbox class="property" checked="{{hasMore}}">Results has more results</paper-checkbox><br>
+				<paper-checkbox class="property" checked="{{loading}}">Loading</paper-checkbox><br>
 			</div>
 		</template>
 
@@ -84,7 +85,7 @@
 				this.loading = true;
 				setTimeout(function() {
 					this.loading = false;
-				}.bind(this), 100);
+				}.bind(this), 1000);
 			};
 			// Generate sample data
 			scope._createItems = function(noResults) {
