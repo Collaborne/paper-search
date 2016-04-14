@@ -1,6 +1,5 @@
 _[Demo and API Docs](http://collaborne.github.io/paper-search)_
 
-
 paper-search [![Bower version](https://badge.fury.io/bo/paper-search.svg)](http://badge.fury.io/bo/paper-search) [![Travis state](https://travis-ci.org/Collaborne/paper-search.svg?branch=master)](https://travis-ci.org/Collaborne/paper-search)
 =========
 
@@ -41,4 +40,3 @@ To use these elements:
     WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
     License for the specific language governing permissions and limitations under
     the License.
-    
