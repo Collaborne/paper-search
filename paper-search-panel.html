@@ -20,9 +20,14 @@ Panel with a search bar and filtering dialog.
   filters="[[filters]]"
   selected-filters="{{selectedFilters}}"
   on-change-request-params="loadData">
-  Show your [[count]] results for "[[search]]"
+  <div>
+  	Show your [[count]] results for "[[search]]"
+  </div>
 </paper-search-panel>
 ```
+
+The content is hidden if no results are available. Content with attribute `fixed`
+is shown even without no results (check the demo for an example).
 
 @demo demo/paper-search-panel.html
 -->
@@ -67,8 +72,10 @@ Panel with a search bar and filtering dialog.
 		</paper-filter-dialog>
 
 		<div hidden$="[[!_hasItems]]">
-			<content></content>
+			<content select=":not([fixed])"></content>
 		</div>
+
+		<content select="[fixed]"></content>
 
 		<div hidden$="[[!_showNoResults(_hasItems,loading)]]" class="noResults">[[noResultsText]]</div>
 
