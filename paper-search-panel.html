@@ -60,7 +60,16 @@ is shown even without no results (check the demo for an example).
 			}
 		</style>
 
-		<paper-search-bar class="search" icon="[[icon]]" placeholder="[[placeholder]]" query="{{search}}" nr-selected-filters="[[_getNrSelectedFilters(selectedFilters)]]" on-paper-search-search="_onSearch" on-paper-search-filter="_onFilter"></paper-search-bar>
+		<paper-search-bar
+			class="search"
+			icon="[[icon]]"
+			placeholder="[[placeholder]]"
+			hide-filter-button="[[hideFilterButton]]"
+			query="{{search}}"
+			nr-selected-filters="[[_getNrSelectedFilters(selectedFilters)]]"
+			on-paper-search-search="_onSearch"
+			on-paper-search-filter="_onFilter">
+		</paper-search-bar>
 		<paper-filter-dialog
 			id="filterDialog"
 			class="filter-dialog"
@@ -140,6 +149,15 @@ is shown even without no results (check the demo for an example).
 				type: Boolean,
 				value: false
 			},
+
+			/**
+             * Whether to hide the Filter button. Set attribute "hide-filter-button" to do so.
+             */
+            hideFilterButton: {
+                type: Boolean,
+                value: false
+            },
+
 			/**
 			 * Number of items loaded per page (i.e. for each click on [more])
 			 */

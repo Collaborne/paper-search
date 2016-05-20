@@ -18,6 +18,7 @@
 			<h2>Search panel</h2>
 			<paper-search-panel
 				placeholder="Search for anything..."
+				hide-filter-button="[[hideFilterButton]]"
 				search="{{search}}"
 				count="{{count}}"
 				items="[[_createItems(noResults)]]"
@@ -40,6 +41,7 @@
 				<paper-checkbox class="property" checked="{{noResults}}">Empty results</paper-checkbox><br>
 				<paper-checkbox class="property" checked="{{hasMore}}">Results has more results</paper-checkbox><br>
 				<paper-checkbox class="property" checked="{{loading}}">Loading</paper-checkbox><br>
+				<paper-checkbox class="property" checked="{{hideFilterButton}}">Hide filter button</paper-checkbox><br>
 			</div>
 		</template>
 
