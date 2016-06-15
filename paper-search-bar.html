@@ -64,7 +64,7 @@ Bar in which the user can enter search terms and filter
 		</div>
 		<paper-icon-button icon="clear" hidden$="[[!query]]" on-tap="_clear" class="icon"></paper-icon-button>
 		<div hidden$="[[hideFilterButton]]">
-			<paper-icon-button id="filter" icon="image:tune" on-tap="_filter" class="icon"></paper-icon-button>
+			<paper-icon-button id="filter" icon="image:tune" on-tap="_filter" class="icon" disabled="[[disableFilterButton]]"></paper-icon-button>
 			<paper-badge for="filter" label="[[nrSelectedFilters]]" class="badge" hidden$="[[!nrSelectedFilters]]"></paper-badge>
 		</div>
 	</template>
@@ -105,6 +105,13 @@ Bar in which the user can enter search terms and filter
                 type: Boolean,
                 value: false
             },
+			/**
+			 * Whether to disable the Filter button. Set attribute "disable-filter-button" to do so.
+			 */
+			disableFilterButton: {
+				type: Boolean,
+				value: false
+			},
 			/**
 			 * Number of filters the user has been selected (shown in the badge) (optional)
 			 */

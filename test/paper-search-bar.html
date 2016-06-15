@@ -44,6 +44,14 @@
 						element._search();
 						expect(element._enabled).to.be.eql(false);
 					});
+
+					test('enables filter button by default', function() {
+						expect(element.querySelector('#filter').disabled).to.be.false;
+					});
+					test('disables filter button when requested', function() {
+						element.disableFilterButton = true;
+						expect(element.querySelector('#filter').disabled).to.be.true;
+					});
 				});
 
 				suite('clear behavior', function() {

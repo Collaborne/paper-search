@@ -65,6 +65,7 @@ is shown even without no results (check the demo for an example).
 			icon="[[icon]]"
 			placeholder="[[placeholder]]"
 			hide-filter-button="[[hideFilterButton]]"
+			disable-filter-button="[[_disableFilterButton(filters)]]"
 			query="{{search}}"
 			nr-selected-filters="[[_getNrSelectedFilters(selectedFilters)]]"
 			on-paper-search-search="_onSearch"
@@ -265,6 +266,10 @@ is shown even without no results (check the demo for an example).
 				});
 
 			return nrSelectedFilters;
+		},
+
+		_disableFilterButton: function(filters) {
+			return !(filters && filters.length > 0);
 		}
 	});
 
