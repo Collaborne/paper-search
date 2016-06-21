@@ -79,24 +79,28 @@
 					});
 
 					test('pre-selects selected values', function() {
-						// Pre-condition: no filters are selected
-						expect(element.$.valuesList.selectedItems.length).to.be.eql(0);
-
 						// Prepare: user selected filter 'age' with
 						element._selectedFilters.age = [ 'adult' ];
 
 						element._selectedFilter = { id: 'age', values: [ { id: 'adult' } ] };
+
+						// Pre-condition: no filters are selected
+						expect(element.$.valuesList.items[0].selected).to.be.undefined;
+
 						element._preselectFilterValues();
 
-						expect(element.$.valuesList.selectedItems.length).to.be.eql(1);
+						expect(element.$.valuesList.items[0].selected).to.be.true;
 					});
 					test('copies over selected values after confirming them', function() {
 						// Pre-condition: no filters are selected
 						element._selectedFilters = {};
 
 						// Prepare: user selected value 'adult' in the age filter
-						element._selectedFilter = { id: 'age' };
-						element.$.valuesList.selectedItems = [ { id: 'adult' }, { id: 'teenager' } ];
+						element._selectedFilter = { id: 'age', values: [
+							{ id: 'adult', selected: true },
+							{ id: 'teenager', selected: true },
+							{ id: 'child' }
+						]};
 
 						element._tapSelectValues();
 						expect(element._selectedFilters.age).to.be.eql([ 'adult', 'teenager' ]);
