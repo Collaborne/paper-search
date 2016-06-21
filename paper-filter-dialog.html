@@ -109,11 +109,11 @@ Dialog with which the user can filter the result set
 						    <span class="title">[[_selectedFilter.name]]</span>
 						</paper-toolbar>
 
-						<iron-list id="valuesList" items="[[_selectedFilter.values]]" as="filterValue" selection-enabled multi-selection>
+						<iron-list id="valuesList" items="[[_selectedFilter.values]]" as="filterValue">
 							<template>
 								<div class="value-holder">
 									<paper-item class="value">
-										<paper-checkbox name="[[filterValue.id]]" checked="{{selected}}"></paper-checkbox>
+										<paper-checkbox name="[[filterValue.id]]" checked="{{filterValue.selected}}"></paper-checkbox>
 										<div>
 											[[filterValue.name]]
 											<span class="nrResults" hidden="[[!filterValue.count]]">([[filterValue.count]])</span>
@@ -234,13 +234,9 @@ Dialog with which the user can filter the result set
 		_preselectFilterValues: function() {
 			var selectedValueIds = this._selectedFilters[this._selectedFilter.id];
 			if (typeof selectedValueIds !== 'undefined' && typeof this._selectedFilter.values !== 'undefined') {
-				this.$.valuesList.clearSelection();
-				this._selectedFilter.values.forEach(function(value) {
-					if (selectedValueIds.indexOf(value.id) >= 0) {
-						// Value is selected
-						this.$.valuesList.selectItem(value);
-					}
-				}.bind(this));
+				this.$.valuesList.items.forEach(function(value) {
+					value.selected = selectedValueIds.indexOf(value.id) >= 0;
+				});
 			}
 		},
 		_tapReset: function(e) {
@@ -253,10 +249,11 @@ Dialog with which the user can filter the result set
 			this.fire('save');
 		},
 		_tapSelectValues: function(e) {
-			// Captured selected valuesList
-			var selectedValues = [];
-			this.$.valuesList.selectedItems.forEach(function(selectedItem) {
-				selectedValues.push(selectedItem.id);
+			// Captured IDs of the selected items
+			var selectedValues = this.$.valuesList.items.filter(function(value) {
+				return value.selected;
+			}).map(function(value) {
+				return value.id;
 			});
 			this._selectedFilters[this._selectedFilter.id] = selectedValues;
 
