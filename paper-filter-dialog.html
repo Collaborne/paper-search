@@ -199,6 +199,10 @@ Dialog with which the user can filter the result set
 		 * Opens the filter dialog
 		 */
 		open: function() {
+			// Attach dialog to the body to ensure it's on top of all existing overlays
+			// XXX - Known issue: this generates addEventListener errors from a11y
+			Polymer.dom(document.body).appendChild(this);
+
 			// Wait until dialog is added to the DOM (required for Safari)
 			setTimeout(function() {
 				this.$.dialog.open();
@@ -247,7 +251,7 @@ Dialog with which the user can filter the result set
 		},
 		_tapSelectValues: function(e) {
 			// Captured IDs of the selected items
-			var selectedValues = this.$.valuesList.items.filter(function(value) {
+			const selectedValues = this.$.valuesList.items.filter(function(value) {
 				return value.selected;
 			}).map(function(value) {
 				return value.id;
