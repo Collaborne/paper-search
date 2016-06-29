@@ -11,10 +11,15 @@
 		<template is="dom-bind">
 			<paper-button raised on-tap="open">Open</paper-button>
 			<paper-filter-dialog id="dialog" filters="[[filters]]" selected-filters="{{selectedFilters}}"></paper-filter-dialog>
+			Selected filters:
+			<span>[[_renderSelectedFilters(selectedFilters)]]</span>
 		</template>
 
 		<script>
 			var scope = document.querySelector("template[is=dom-bind]");
+			scope._renderSelectedFilters = function(selectedFilters) {
+				return JSON.stringify(selectedFilters);
+			};
 			scope.open = function() {
 				this.$.dialog.open();
 			};
