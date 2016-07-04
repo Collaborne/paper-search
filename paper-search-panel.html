@@ -1,5 +1,6 @@
 <!doctype html>
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../paper-more-button/paper-more-button.html">
 <link rel="import" href="../paper-styles/paper-styles.html">
 <link rel="import" href="paper-search-bar.html">
@@ -35,6 +36,10 @@ is shown even without no results (check the demo for an example).
 
 	<template>
 		<style>
+			:host,.items {
+				@apply(--layout-vertical);
+			}
+
 			.search {
 				border-bottom: 1px solid #eee;
 			}
@@ -81,7 +86,7 @@ is shown even without no results (check the demo for an example).
 			no-values-label="[[noValuesLabel]]">
 		</paper-filter-dialog>
 
-		<div hidden$="[[!_hasItems]]">
+		<div hidden$="[[!_hasItems]]" class="items flex">
 			<content select=":not([fixed])"></content>
 		</div>
 
