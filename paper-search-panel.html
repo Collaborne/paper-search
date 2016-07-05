@@ -13,17 +13,17 @@ Panel with a search bar and filtering dialog.
 
 ```html
 <paper-search-panel
-  search="{{search}}"
-  count="{{count}}"
-  items="[[items]]"
-  has-more="[[hasMore]]"
-  loading="[[loading]]"
-  filters="[[filters]]"
-  selected-filters="{{selectedFilters}}"
-  on-change-request-params="loadData">
-  <div>
-  	Show your [[count]] results for "[[search]]"
-  </div>
+	search="{{search}}"
+	count="{{count}}"
+	items="[[items]]"
+	has-more="[[hasMore]]"
+	loading="[[loading]]"
+	filters="[[filters]]"
+	selected-filters="{{selectedFilters}}"
+	on-change-request-params="loadData">
+	<div>
+		Show your [[count]] results for "[[search]]"
+	</div>
 </paper-search-panel>
 ```
 
@@ -151,7 +151,7 @@ is shown even without no results (check the demo for an example).
 				type: Boolean,
 				value: false
 			},
-			
+
 			/**
 			 * True if items are currently loaded
 			 */

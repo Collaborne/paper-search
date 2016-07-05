@@ -154,7 +154,7 @@
 					test('shows filters tab if no filter is selected', function() {
 						expect(element._getSelectedPage(undefined)).to.be.eql(0);
 					});
-					test('shows  values tab if a filter is selected', function() {
+					test('shows values tab if a filter is selected', function() {
 						expect(element._getSelectedPage({ id: 'age' })).to.be.eql(1);
 					});
 				});
