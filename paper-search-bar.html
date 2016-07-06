@@ -58,9 +58,9 @@ Bar in which the user can enter search terms and filter
 			}
 		</style>
 
-		<div class="input-panel flex" on-tap="_enable">
+		<div class="input-panel flex">
 			<iron-icon icon="[[icon]]" class="icon"></iron-icon>
-			<input is="iron-input" id="input" bind-value="{{query}}" placeholder="[[placeholder]]" class="flex" disabled="[[!_enabled]]"></input>
+			<input is="iron-input" id="input" bind-value="{{query}}" placeholder="[[placeholder]]" class="flex"></input>
 		</div>
 		<paper-icon-button icon="clear" hidden$="[[!query]]" on-tap="_clear" class="icon"></paper-icon-button>
 		<div hidden$="[[hideFilterButton]]">
@@ -133,14 +133,6 @@ Bar in which the user can enter search terms and filter
 				type: String,
 				value: 'Search'
 			},
-
-			/**
-			 * Text input box is only opened when the user clicks on it. This avoids auto-focusing in Cordova applications.
-			 */
-			_enabled: {
-				type: Boolean,
-				value: false
-			}
 		},
 
 		behaviors: [
@@ -152,10 +144,6 @@ Bar in which the user can enter search terms and filter
 		},
 
 		// Private methods
-		_enable: function(e) {
-			this._enabled = true;
-			this.$.input.focus();
-		},
 		_filter: function(e) {
 			this.fire('paper-search-filter');
 		},
@@ -164,8 +152,6 @@ Bar in which the user can enter search terms and filter
 			this.$.input.focus();
 		},
 		_search: function() {
-			this._enabled = false;
-
 			this.fire('paper-search-search');
 		}
 	});
