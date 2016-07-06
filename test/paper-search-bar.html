@@ -4,63 +4,32 @@
 		<title>paper-search-bar</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		
+
 		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 		<script src="../../web-component-tester/browser.js"></script>
 		<script src="../../test-fixture/test-fixture-mocha.js"></script>
 		<script src="../../iron-test-helpers/mock-interactions.js"></script>
-		
+
 		<link rel="import" href="../paper-search-bar.html">
 		<link rel="import" href="../../test-fixture/test-fixture.html">
 	</head>
 	<body>
-	
+
 		<test-fixture id="TrivialElement">
 			<template>
 				<paper-search-bar></paper-search-bar>
 			</template>
 		</test-fixture>
-	
+
 		<script>
 			suite('<paper-search-bar>', function() {
-				suite('enable behavior', function() {
-					var element;
-	
-					setup(function() {
-						element = fixture('TrivialElement');
-					});
-					
-					test('defaults to disabled', function() {
-						expect(element._enabled).to.be.eql(false);
-					});
-
-					test('sets enabled when tapping input', function() {
-						element._enable();
-						expect(element._enabled).to.be.eql(true);
-					});
-
-					test('disables when triggering search', function() {
-						element._enabled = true;
-						element._search();
-						expect(element._enabled).to.be.eql(false);
-					});
-
-					test('enables filter button by default', function() {
-						expect(element.querySelector('#filter').disabled).to.be.false;
-					});
-					test('disables filter button when requested', function() {
-						element.disableFilterButton = true;
-						expect(element.querySelector('#filter').disabled).to.be.true;
-					});
-				});
-
 				suite('clear behavior', function() {
 					var element;
-	
+
 					setup(function() {
 						element = fixture('TrivialElement');
 					});
-					
+
 					test('removes input when tapping clear', function() {
 						element.query = 'query';
 						element._clear();
@@ -70,11 +39,11 @@
 
 				suite('filter behavior', function() {
 					var element;
-	
+
 					setup(function() {
 						element = fixture('TrivialElement');
 					});
-					
+
 					test('fires filter event when clicking filter', function(done) {
 						element.addEventListener('paper-search-filter', function() {
 							done();
@@ -85,11 +54,11 @@
 
 				suite('search behavior', function() {
 					var element;
-	
+
 					setup(function() {
 						element = fixture('TrivialElement');
 					});
-					
+
 					test('fires search event when pressing enter', function(done) {
 						element.addEventListener('paper-search-search', function() {
 							done();
@@ -99,6 +68,6 @@
 				});
 			});
 		</script>
-	
+
 	</body>
 </html>
