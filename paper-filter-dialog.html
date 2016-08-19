@@ -113,7 +113,7 @@ Dialog with which the user can filter the result set
 							<template>
 								<div class="value-holder">
 									<paper-item class="value">
-										<paper-checkbox name="[[filterValue.id]]" checked="{{filterValue.selected}}"></paper-checkbox>
+										<paper-checkbox name="[[filterValue.id]]" on-change="_toggleCheckbox" checked$="[[_isSelected(filterValue.selected,_forceRedrawDummy)]]"></paper-checkbox>
 										<div>
 											[[filterValue.name]]
 											<span class="nrResults" hidden="[[!filterValue.count]]">([[filterValue.count]])</span>
@@ -213,6 +213,13 @@ Dialog with which the user can filter the result set
 					this._selectedFilters[selectedFilterId] = this.selectedFilters[selectedFilterId];
 				}
 
+				//Make changes to filters as per the value of selectedFilters
+				for (var filter in this.filters){
+					for(var value in this.filters[filter].values){
+						this.filters[filter].values[value].selected = this._findInArray(this.filters[filter].values[value].id,this.selectedFilters[this.filters[filter].id])
+					}
+				}
+
 				// Redraw filters in case they are still here from a formerly filtering attempt that was cancelled
 				this._redrawFilterValues();
 
@@ -242,6 +249,12 @@ Dialog with which the user can filter the result set
 		},
 		_tapReset: function(e) {
 			this._selectedFilters = {};
+			//Reset the filters
+			for (var filter in this.filters){
+				for(var value in this.filters[filter].values){
+					this.filters[filter].values[value].selected = false;
+				}
+			}
 			this._redrawFilterValues();
 		},
 		_tapApply: function(e) {
@@ -303,6 +316,23 @@ Dialog with which the user can filter the result set
 		_getSelectedPage: function(_selectedFilter) {
 			// Show all filters if no filter is selected
 			return !_selectedFilter ? 0 : 1;
+		},
+		//A dummy redraw function to return the passed value
+		_isSelected(value,_forceRedrawDummy){
+			return value;
+		},
+		//Manually toggles the value of checkbox
+		_toggleCheckbox: function(event){
+			event.model.filterValue.selected = !event.model.filterValue.selected
+		},
+		//Search for the value in arr
+		_findInArray: function(value,arr){
+			for(var v in arr){
+				if(arr[v] === value){
+					return true;
+				}
+			}
+			return false;
 		}
 	});
 
