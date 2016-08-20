@@ -281,18 +281,18 @@ Dialog with which the user can filter the result set
 		// Returns the concated names of the selected values for a specific filter
 		_getSelectedValuesNames: function(filter, _selectedFilters, _forceRedrawDummy) {
 			var selectedValueIds = _selectedFilters[filter.id];
-			if (typeof filter.values === 'undefined' || typeof selectedValueIds === 'undefined') {
+			if (!filter.values || !selectedValueIds) {
 				return this.noValuesLabel;
 			}
 
-			// Look up names
-			var names = [];
-			filter.values.forEach(function(value) {
-				// Add names of values that are selected
-				if (selectedValueIds.indexOf(value.id) >= 0) {
-					names.push(value.name);
-				}
-			});
+			// Capture names of all selected values
+			var names = filter.values.filter(function(value) {
+				// Only consider values that are selected
+				return selectedValueIds.indexOf(value.id) >= 0;
+			}).map(function(value) {
+				// Capture name of the selected value
+				return value.name;
+			})
 
 			if (names.length === 0) {
 				return this.noValuesLabel;
