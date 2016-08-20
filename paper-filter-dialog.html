@@ -94,7 +94,7 @@ Dialog with which the user can filter the result set
 									<paper-ripple fit></paper-ripple>
 									<paper-item-body two-line class="filter-body">
 										<div class="name">[[filter.name]]</div>
-										<div secondary>[[_getSelectedValuesNames(filter,_selectedFilters,_forceRedrawDummy)]]</div>
+										<div secondary>[[_getSelectedValuesNames(filter, _selectedFilters)]]</div>
 									</paper-item-body>
 								</paper-item>
 							</template>
@@ -188,10 +188,6 @@ Dialog with which the user can filter the result set
 				value: {}
 			},
 			_selectedFilter: Object,
-			_forceRedrawDummy: {
-				type: Number,
-				value: 0
-			}
 		},
 
 		// Public methods
@@ -267,7 +263,6 @@ Dialog with which the user can filter the result set
 		/**
 		 * True if any filter was set
 		 * @param  {[type]} selectedFilters  [description]
-		 * @param  {[type]} _forceRedrawDummy [description]
 		 * @return {[type]}                   [description]
 		 */
 		_hasSelectedFilters: function(selectedFilters) {
@@ -281,7 +276,7 @@ Dialog with which the user can filter the result set
 			return false;
 		},
 		// Returns the concated names of the selected values for a specific filter
-		_getSelectedValuesNames: function(filter, _selectedFilters, _forceRedrawDummy) {
+		_getSelectedValuesNames: function(filter, _selectedFilters) {
 			var selectedValueIds = _selectedFilters[filter.id];
 			if (!filter.values || !selectedValueIds) {
 				return this.noValuesLabel;
@@ -301,10 +296,6 @@ Dialog with which the user can filter the result set
 			}
 
 			return names.join(', ');
-		},
-		// Forces to redraw filters (required because Polymer doesn't pick up all data changes to arrays)
-		_redrawFilterValues: function() {
-			this._forceRedrawDummy = Math.random();
 		},
 		_getSelectedPage: function(_selectedFilter) {
 			// Show all filters if no filter is selected
