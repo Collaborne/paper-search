@@ -85,22 +85,23 @@
 						element._selectedFilter = { id: 'age', values: [ { id: 'adult' } ] };
 
 						// Pre-condition: no filters are selected
-						expect(element.$.valuesList.items[0].selected).to.be.undefined;
+						expect(element._selectedFilterValues).to.be.eql([]);
 
 						element._preselectFilterValues();
 
-						expect(element.$.valuesList.items[0].selected).to.be.true;
+						expect(element._selectedFilterValues[0].selected).to.be.true;
 					});
 					test('copies over selected values after confirming them', function() {
 						// Pre-condition: no filters are selected
 						element._selectedFilters = {};
 
 						// Prepare: user selected value 'adult' in the age filter
-						element._selectedFilter = { id: 'age', values: [
+						element._selectedFilter = { id: 'age', values: []};
+						element._selectedFilterValues = [
 							{ id: 'adult', selected: true },
 							{ id: 'teenager', selected: true },
 							{ id: 'child' }
-						]};
+						];
 
 						element._tapSelectValues();
 						expect(element._selectedFilters.age).to.be.eql([ 'adult', 'teenager' ]);
