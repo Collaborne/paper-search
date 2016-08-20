@@ -291,11 +291,7 @@ Dialog with which the user can filter the result set
 				return value.name;
 			})
 
-			if (names.length === 0) {
-				return this.noValuesLabel;
-			}
-
-			return names.join(', ');
+			return names.length > 0 ? names.join(', ') : this.noValuesLabel;
 		},
 		_getSelectedPage: function(_selectedFilter) {
 			// Show all filters if no filter is selected
