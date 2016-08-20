@@ -109,7 +109,7 @@ Dialog with which the user can filter the result set
 							<span class="title">[[_selectedFilter.name]]</span>
 						</paper-toolbar>
 
-						<iron-list id="valuesList" items="[[_selectedFilter.values]]" as="filterValue">
+						<iron-list id="valuesList" items="[[_selectedFilterValues]]" as="filterValue">
 							<template>
 								<div class="value-holder">
 									<paper-item class="value">
@@ -222,20 +222,22 @@ Dialog with which the user can filter the result set
 			this.$.dialog.close();
 		},
 
-		// Actions
+		/**
+		 * Handles if the user taps on a filter
+		 */
 		_tapSelectFilter: function(e) {
 			this.$.selector.select(e.model.filter);
 
-			this._preselectFilterValues();
-		},
-		// Pre-select selected filter values
-		_preselectFilterValues: function() {
+			// Check all values that are selected
 			var selectedValueIds = this._selectedFilters[this._selectedFilter.id];
-			if (typeof selectedValueIds !== 'undefined' && typeof this._selectedFilter.values !== 'undefined') {
-				this.$.valuesList.items.forEach(function(value) {
-					value.selected = selectedValueIds.indexOf(value.id) >= 0;
+			var isSelected = function(value) {
+				return Boolean(selectedValueIds) && selectedValueIds.indexOf(value.id) >= 0;
+			};
+			this._selectedFilterValues = this._selectedFilter.values.map(function(value) {
+				return Object.assign({}, value, {
+					selected: isSelected(value)
 				});
-			}
+			});
 		},
 		_tapReset: function(e) {
 			this._selectedFilters = {};
@@ -248,7 +250,7 @@ Dialog with which the user can filter the result set
 		},
 		_tapSelectValues: function(e) {
 			// Captured IDs of the selected items
-			const selectedValues = this.$.valuesList.items.filter(function(value) {
+			const selectedValues = this._selectedFilterValues.filter(function(value) {
 				return value.selected;
 			}).map(function(value) {
 				return value.id;
