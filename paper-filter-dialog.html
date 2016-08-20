@@ -84,7 +84,7 @@ Dialog with which the user can filter the result set
 						<paper-toolbar>
 							<paper-icon-button on-tap="close" icon="close"></paper-icon-button>
 							<span class="title"></span>
-							<paper-button on-tap="_tapReset" class="reset" hidden$="[[!_hasSelectedFilters(_selectedFilters,_forceRedrawDummy)]]">[[resetButton]]</paper-button>
+							<paper-button on-tap="_tapReset" class="reset" hidden$="[[!_hasSelectedFilters(_selectedFilters)]]">[[resetButton]]</paper-button>
 							<paper-button on-tap="_tapApply" dialog-confirm>[[saveButton]]</paper-button>
 						</paper-toolbar>
 
@@ -253,18 +253,25 @@ Dialog with which the user can filter the result set
 			}).map(function(value) {
 				return value.id;
 			});
-			this._selectedFilters[this._selectedFilter.id] = selectedValues;
+			this._selectedFilters = Object.assign({}, this._selectedFilters, {
+				[this._selectedFilter.id] : selectedValues
+			});
 
 			this.$.selector.deselect(this._selectedFilter);
 
 			this._redrawFilterValues();
 		},
 
-		// Returns if any filters were selected
-		_hasSelectedFilters: function(_selectedFilters, _forceRedrawDummy) {
+		/**
+		 * True if any filter was set
+		 * @param  {[type]} selectedFilters  [description]
+		 * @param  {[type]} _forceRedrawDummy [description]
+		 * @return {[type]}                   [description]
+		 */
+		_hasSelectedFilters: function(selectedFilters) {
 			// Iterate until we find a filter that is selected
-			for (selectedFilter in _selectedFilters) {
-				if (_selectedFilters[selectedFilter].length > 0) {
+			for (selectedFilter in selectedFilters) {
+				if (selectedFilters[selectedFilter].length > 0) {
 					return true;
 				}
 			}
