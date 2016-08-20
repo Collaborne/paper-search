@@ -208,10 +208,7 @@ Dialog with which the user can filter the result set
 				this.$.dialog.open();
 
 				// Clone selected filters, so it can be changed without touching the external property
-				this._selectedFilters = {};
-				for (var selectedFilterId in this.selectedFilters) {
-					this._selectedFilters[selectedFilterId] = this.selectedFilters[selectedFilterId];
-				}
+				this._selectedFilters = Object.assign({}, this.selectedFilters);
 
 				// Redraw filters in case they are still here from a formerly filtering attempt that was cancelled
 				this._redrawFilterValues();
