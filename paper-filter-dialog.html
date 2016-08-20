@@ -188,6 +188,10 @@ Dialog with which the user can filter the result set
 				value: {}
 			},
 			_selectedFilter: Object,
+			_selectedFilterValues: {
+				type: Array,
+				value: []
+			}
 		},
 
 		// Public methods
@@ -221,6 +225,13 @@ Dialog with which the user can filter the result set
 		_tapSelectFilter: function(e) {
 			this.$.selector.select(e.model.filter);
 
+			this._preselectFilterValues();
+		},
+
+		/**
+		 * Separate function for unit testing
+		 */
+		_preselectFilterValues: function() {
 			// Check all values that are selected
 			var selectedValueIds = this._selectedFilters[this._selectedFilter.id];
 			var isSelected = function(value) {
