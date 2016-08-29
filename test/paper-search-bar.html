@@ -35,6 +35,13 @@
 						element._clear();
 						expect(element.query).to.be.eql('');
 					});
+
+					test('fires clear event when clicking clear', function(done) {
+						element.addEventListener('paper-search-clear', function() {
+							done();
+						});
+						element._clear();
+					});
 				});
 
 				suite('filter behavior', function() {

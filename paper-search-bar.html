@@ -88,6 +88,11 @@ Bar in which the user can enter search terms and filter
 		 *
 		 * @event paper-search-search
 		 */
+		 /**
+		 * Fired when the user taps the clear icon
+		 *
+		 * @event paper-search-clear
+		 */
 
 		properties: {
 			/**
@@ -150,6 +155,7 @@ Bar in which the user can enter search terms and filter
 		_clear: function() {
 			this.query = "";
 			this.$.input.focus();
+			this.fire('paper-search-clear');
 		},
 		_search: function() {
 			this.fire('paper-search-search');
