@@ -34,6 +34,7 @@ Bar in which the user can enter search terms and filter
 
 			.icon {
 				color: var(--disabled-text-color);
+				@apply(--icon-styles);
 			}
 
 			#input {
@@ -42,10 +43,13 @@ Bar in which the user can enter search terms and filter
 				outline: 0;
 				padding: 16px 0;
 				cursor: text;
+				background: transparent;
+				color: inherit;
+				@apply(--input-styles);
 			}
 
 			#input[disabled] {
-				background: var(--background-color, white);
+				@apply(--disabled-input-styles);
 			}
 
 			.badge {
