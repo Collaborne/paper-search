@@ -10,6 +10,7 @@ cache:
 before_script:
 - npm install web-component-tester bower polylint wct-local@2.0.8
 - $(npm bin)/bower install
+- $(npm bin)/polylint --no-recursion
 script:
 - xvfb-run $(npm bin)/wct
 after_success: '[ ${TRAVIS_PULL_REQUEST} = "false" ] && [ ${TRAVIS_BRANCH} = "master" ] && $(npm bin)/bower install -s https://${GH_TOKEN}@github.com/Collaborne/collaborne-build-tools.git && bower_components/collaborne-build-tools/gpages_build.sh Collaborne info@collaborne.com'
