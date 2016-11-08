@@ -14,7 +14,7 @@ cache:
 before_install:
 - "[ x$(cat node_modules/.last-node-version 2>/dev/null) = x$(node -e 'console.log(process.version)') ] || (npm rebuild && node -e 'console.log(process.version)' > node_modules/.last-node-version)"
 before_script:
-- npm install web-component-tester bower polylint wct-local@2.0.8
+- npm install web-component-tester bower polylint wct-local
 - $(npm bin)/bower install
 - $(npm bin)/polylint --no-recursion
 script:
