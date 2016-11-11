@@ -145,20 +145,6 @@
 						expect(element._getSelectedValuesNames(filter, { age: [ 'child', 'adult' ] }, 0)).to.be.eql('0-12, 20+');
 					});
 				});
-				suite('select tab behavior', function() {
-					var element;
-
-					setup(function() {
-						element = fixture('TrivialElement');
-					});
-
-					test('shows filters tab if no filter is selected', function() {
-						expect(element._getSelectedPage(undefined)).to.be.eql(0);
-					});
-					test('shows values tab if a filter is selected', function() {
-						expect(element._getSelectedPage({ id: 'age' })).to.be.eql(1);
-					});
-				});
 			});
 		</script>
 
