@@ -8,13 +8,19 @@
 
 	<body>
 		<template is="dom-bind">
-			<paper-search-bar placeholder="Enter search term" nr-selected-filters="3" on-paper-search-search="search" on-paper-search-filter="filter"></paper-search-bar>
+			<paper-search-bar
+				query="{{query}}"
+				placeholder="Enter search term"
+				nr-selected-filters="3"
+				on-paper-search-search="search"
+				on-paper-search-filter="filter">
+			</paper-search-bar>
 		</template>
 
 		<script>
 			var scope = document.querySelector("template[is=dom-bind]");
 			scope.search = function() {
-				alert("Searching...");
+				alert("Searching for " + scope.query);
 			};
 			scope.filter = function() {
 				alert("Filter dialog");
