@@ -7,8 +7,8 @@
 <link rel="import" href="../iron-input/iron-input.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../paper-badge/paper-badge.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../paper-styles/paper-styles.html">
 
 <!--
 Bar in which the user can enter search terms and filter
@@ -18,7 +18,7 @@ Bar in which the user can enter search terms and filter
 <dom-module id="paper-search-bar">
 
 	<template>
-		<style>
+		<style include="iron-flex">
 			:host {
 				background: var(--background-color, white);
 				display: block;
