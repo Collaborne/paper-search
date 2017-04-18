@@ -96,8 +96,13 @@
 					this.loading = false;
 				}.bind(this), 1000);
 			};
-			// Generate sample data
-			scope._createItems = function(noResults) {
+
+			/**
+			 * Generate sample data
+			 *
+			 * @param {boolean} noResults if `true` then an empty result is simulated, otherwise a non-empty result.
+			 */
+			scope._createItems = function(noResults) {				
 				if (noResults) {
 					return [];
 				}
