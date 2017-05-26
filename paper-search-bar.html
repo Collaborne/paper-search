@@ -72,17 +72,16 @@ Bar in which the user can enter search terms and filter
 				<input placeholder="[[placeholder]]">
 			</iron-input>
 		</div>
-    	<template is="dom-if" if="{{query}}">
+		<template is="dom-if" if="{{query}}">
 			<paper-icon-button icon="clear" on-tap="_clear" class="icon"></paper-icon-button>
-    	</template>
-    	<template is="dom-if" if="{{!hideFilterButton}}">
+		</template>
+		<template is="dom-if" if="{{!hideFilterButton}}">
 			<template is="dom-if" if="{{!disableFilterButton}}">
 				<paper-icon-button id="filter" icon="image:tune" on-tap="_filter" class="icon"></paper-icon-button>
 			</template>
 			<paper-badge for="filter" label="[[nrSelectedFilters]]" class="badge" hidden$="[[!nrSelectedFilters]]"></paper-badge>
 		</template>
 	</template>
-
 </dom-module>
 
 <script>
