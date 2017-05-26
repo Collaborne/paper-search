@@ -40,13 +40,16 @@ Bar in which the user can enter search terms and filter
 
 			#input {
 				margin: 0 10px;
-				border: 0;
-				outline: 0;
 				padding: 16px 0;
 				cursor: text;
 				background: transparent;
 				color: inherit;
 				@apply(--input-styles);
+			}
+
+			input {
+				border: 0;
+				outline: 0;
 			}
 
 			#input[disabled] {
@@ -65,15 +68,20 @@ Bar in which the user can enter search terms and filter
 
 		<div class="input-panel flex">
 			<iron-icon icon="[[icon]]" class="icon"></iron-icon>
-			<input is="iron-input" id="input" bind-value="{{query}}" placeholder="[[placeholder]]" class="flex"></input>
+			<iron-input id="input" bind-value="{{query}}" class="flex">
+				<input placeholder="[[placeholder]]">
+			</iron-input>
 		</div>
-		<paper-icon-button icon="clear" hidden$="[[!query]]" on-tap="_clear" class="icon"></paper-icon-button>
-		<div hidden$="[[hideFilterButton]]">
-			<paper-icon-button id="filter" icon="image:tune" on-tap="_filter" class="icon" disabled="[[disableFilterButton]]"></paper-icon-button>
+		<template is="dom-if" if="{{query}}">
+			<paper-icon-button icon="clear" on-tap="_clear" class="icon"></paper-icon-button>
+		</template>
+		<template is="dom-if" if="{{!hideFilterButton}}">
+			<template is="dom-if" if="{{!disableFilterButton}}">
+				<paper-icon-button id="filter" icon="image:tune" on-tap="_filter" class="icon"></paper-icon-button>
+			</template>
 			<paper-badge for="filter" label="[[nrSelectedFilters]]" class="badge" hidden$="[[!nrSelectedFilters]]"></paper-badge>
-		</div>
+		</template>
 	</template>
-
 </dom-module>
 
 <script>

@@ -126,12 +126,12 @@
 
 					test('disables filter button when no filters available', function() {
 						element.filters = [];
-						expect(element.querySelector('paper-search-bar').disableFilterButton).to.be.true;
+						expect(element.getPaperSearchBarInstance().disableFilterButton).to.be.true;
 					});
 
 					test('enables filter button when filters available', function() {
 						element.filters = [ { id: 'test', name: 'Test', values: [ { id: 'value', count: 1 } ] } ];
-						expect(element.querySelector('paper-search-bar').disableFilterButton).to.be.false;						
+						expect(element.getPaperSearchBarInstance().disableFilterButton).to.be.false;						
 					});
 				});
 			});
