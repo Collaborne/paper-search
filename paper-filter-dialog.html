@@ -75,47 +75,51 @@ Dialog with which the user can filter the result set
 
 		<array-selector id="selector" items="{{filters}}" selected="{{_selectedFilter}}"></array-selector>
 		<paper-dialog id="dialog" class="dialog">
-			<div class="page" hidden$="[[_selectedFilter]]">
-				<paper-toolbar>
-					<paper-icon-button on-tap="close" icon="close"></paper-icon-button>
-					<span class="title"></span>
-					<paper-button on-tap="_tapReset" class="reset" hidden$="[[!_hasSelectedFilters(_selectedFilters)]]">[[resetButton]]</paper-button>
-					<paper-button on-tap="_tapApply" dialog-confirm>[[saveButton]]</paper-button>
-				</paper-toolbar>
+    		<template is="dom-if" if="{{!_selectedFilter}}">
+				<div class="page">
+					<paper-toolbar>
+						<paper-icon-button slot="top" on-tap="close" icon="close"></paper-icon-button>
+						<span slot="top" class="title"></span>
+						<paper-button slot="top" on-tap="_tapReset" class="reset" hidden$="[[!_hasSelectedFilters(_selectedFilters)]]">[[resetButton]]</paper-button>
+						<paper-button slot="top" on-tap="_tapApply" dialog-confirm>[[saveButton]]</paper-button>
+					</paper-toolbar>
 
-				<iron-list items="[[filters]]" as="filter" class="list">
-					<template>
-						<paper-item class="filter" on-tap="_tapSelectFilter">
-							<paper-ripple fit></paper-ripple>
-							<paper-item-body two-line class="filter-body">
-								<div class="name">[[filter.name]]</div>
-								<div secondary>[[_getSelectedValuesNames(filter, _selectedFilters)]]</div>
-							</paper-item-body>
-						</paper-item>
-					</template>
-				</iron-list>
-			</div>
-
-			<div class="page" hidden$="[[!_selectedFilter]]">
-				<paper-toolbar>
-					<paper-icon-button icon="arrow-back" on-tap="_tapSelectValues"></paper-icon-button>
-					<span class="title">[[_selectedFilter.name]]</span>
-				</paper-toolbar>
-
-				<iron-list id="valuesList" items="[[_selectedFilterValues]]" as="filterValue" class="list">
-					<template>
-						<div class="value-holder">
-							<paper-item class="value">
-								<paper-checkbox name="[[filterValue.id]]" checked="{{filterValue.selected}}"></paper-checkbox>
-								<div>
-									[[filterValue.name]]
-									<span class="nrResults" hidden="[[!filterValue.count]]">([[filterValue.count]])</span>
-								</div>
+					<iron-list items="[[filters]]" as="filter" class="list">
+						<template>
+							<paper-item class="filter" on-tap="_tapSelectFilter">
+								<paper-ripple fit></paper-ripple>
+								<paper-item-body two-line class="filter-body">
+									<div class="name">[[filter.name]]</div>
+									<div secondary>[[_getSelectedValuesNames(filter, _selectedFilters)]]</div>
+								</paper-item-body>
 							</paper-item>
-						</div>
-					</template>
-				</iron-list>
-			</div>
+						</template>
+					</iron-list>
+				</div>
+    		</template>
+
+    		<template is="dom-if" if="{{_selectedFilter}}">
+				<div class="page">
+					<paper-toolbar>
+						<paper-icon-button slot="top" icon="arrow-back" on-tap="_tapSelectValues"></paper-icon-button>
+						<span slot="top" class="title">[[_selectedFilter.name]]</span>
+					</paper-toolbar>
+
+					<iron-list id="valuesList" items="[[_selectedFilterValues]]" as="filterValue" class="list">
+						<template>
+							<div class="value-holder">
+								<paper-item class="value">
+									<paper-checkbox name="[[filterValue.id]]" checked="{{filterValue.selected}}"></paper-checkbox>
+									<div>
+										[[filterValue.name]]
+										<span class="nrResults" hidden="[[!filterValue.count]]">([[filterValue.count]])</span>
+									</div>
+								</paper-item>
+							</div>
+						</template>
+					</iron-list>
+				</div>
+			</template>
 		</paper-dialog>
 	</template>
 </dom-module>
