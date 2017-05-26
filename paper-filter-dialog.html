@@ -200,9 +200,6 @@ Dialog with which the user can filter the result set
 
 				// Clone selected filters, so it can be changed without touching the external property
 				this._selectedFilters = Object.assign({}, this.selectedFilters);
-
-				// @see https://github.com/PolymerElements/neon-animation/issues/60#issuecomment-152345020
-				this.$.valuesList.fire('iron-resize');
 			}.bind(this), 1);
 		},
 
