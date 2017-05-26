@@ -69,6 +69,7 @@ is shown even without no results (check the demo for an example).
 		</style>
 
 		<paper-search-bar
+			id="paperSearchBar"
 			class="search"
 			icon="[[icon]]"
 			placeholder="[[placeholder]]"
@@ -89,17 +90,23 @@ is shown even without no results (check the demo for an example).
 			no-values-label="[[noValuesLabel]]">
 		</paper-filter-dialog>
 
-		<div hidden$="[[!_hasItems]]" class="items flex">
-			<content select=":not([fixed])"></content>
-		</div>
+    	<template is="dom-if" if="{{_hasItems}}">
+			<div class="items flex">
+				<slot select=":not([fixed])"></slot>
+			</div>
+    	</template>
 
-		<content select="[fixed]"></content>
+		<slot select="[fixed]"></slot>
 
-		<div hidden$="[[!_showNoResults(_hasItems,loading)]]" class="noResults">[[noResultsText]]</div>
+    	<template is="dom-if" if="{{_showNoResults(_hasItems,loading)}}">
+			<div class="noResults">[[noResultsText]]</div>
+    	</template>
 
-		<div class="more" hidden$="[[!hasMore]]">
-			<paper-more-button has-more="[[hasMore]]" loading="[[loading]]" on-tap-more="_loadMore">[[moreButton]]</paper-more-button>
-		</div>
+    	<template is="dom-if" if="{{hasMore}}">
+			<div class="more">
+				<paper-more-button has-more="[[hasMore]]" loading="[[loading]]" on-tap-more="_loadMore">[[moreButton]]</paper-more-button>
+			</div>
+    	</template>
 	</template>
 </dom-module>
 
@@ -230,6 +237,10 @@ is shown even without no results (check the demo for an example).
 				computed: '_computeHasItems(items)',
 				value: false
 			}
+		},
+
+		getPaperSearchBarInstance: function() {
+			return this.$.paperSearchBar;
 		},
 
 		// Private methods

@@ -14,39 +14,41 @@
 	</head>
 
 	<body>
-		<template is="dom-bind">
-			<h2>Search panel</h2>
-			<paper-search-panel
-				placeholder="Search for anything..."
-				hide-filter-button="[[hideFilterButton]]"
-				search="{{search}}"
-				count="{{count}}"
-				items="[[_createItems(noResults)]]"
-				has-more="[[hasMore]]"
-				loading="[[loading]]"
-				filters="[[filters]]"
-				selected-filters="{{selectedFilters}}"
-				on-change-request-params="loadData">
-				<div>
-					Your job: Show your [[count]] results for "[[search]]"
-				</div>
+		<dom-bind>
+			<template>
+				<h2>Search panel</h2>
+				<paper-search-panel
+					placeholder="Search for anything..."
+					hide-filter-button="[[hideFilterButton]]"
+					search="{{search}}"
+					count="{{count}}"
+					items="[[_createItems(noResults)]]"
+					has-more="[[hasMore]]"
+					loading="[[loading]]"
+					filters="[[filters]]"
+					selected-filters="{{selectedFilters}}"
+					on-change-request-params="loadData">
+					<div>
+						Your job: Show your [[count]] results for "[[search]]"
+					</div>
 
-				<div fixed>
-					Content that is always shown
-				</div>
-			</paper-search-panel>
+					<div fixed>
+						Content that is always shown
+					</div>
+				</paper-search-panel>
 
-			<h2>Properties</h2>
-			<div class="vertical-section">
-				<paper-checkbox class="property" checked="{{noResults}}">Empty results</paper-checkbox><br>
-				<paper-checkbox class="property" checked="{{hasMore}}">Results has more results</paper-checkbox><br>
-				<paper-checkbox class="property" checked="{{loading}}">Loading</paper-checkbox><br>
-				<paper-checkbox class="property" checked="{{hideFilterButton}}">Hide filter button</paper-checkbox><br>
-			</div>
-		</template>
+				<h2>Properties</h2>
+				<div class="vertical-section">
+					<paper-checkbox class="property" checked="{{noResults}}">Empty results</paper-checkbox><br>
+					<paper-checkbox class="property" checked="{{hasMore}}">Results has more results</paper-checkbox><br>
+					<paper-checkbox class="property" checked="{{loading}}">Loading</paper-checkbox><br>
+					<paper-checkbox class="property" checked="{{hideFilterButton}}">Hide filter button</paper-checkbox><br>
+				</div>
+			</template>
+		</dom-bind>
 
 		<script>
-			var scope = document.querySelector("template[is=dom-bind]");
+			var scope = document.querySelector("dom-bind");
 			scope.hasMore = true;
 			scope.selectedFilters = {
 				age: [ "teenager", "adult" ],
@@ -102,7 +104,7 @@
 			 *
 			 * @param {boolean} noResults if `true` then an empty result is simulated, otherwise a non-empty result.
 			 */
-			scope._createItems = function(noResults) {				
+			scope._createItems = function(noResults) {	
 				if (noResults) {
 					return [];
 				}
