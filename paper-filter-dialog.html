@@ -75,7 +75,7 @@ Dialog with which the user can filter the result set
 
 		<array-selector id="selector" items="{{filters}}" selected="{{_selectedFilter}}"></array-selector>
 		<paper-dialog id="dialog" class="dialog">
-    		<template is="dom-if" if="{{!_selectedFilter}}">
+			<template is="dom-if" if="{{!_selectedFilter}}">
 				<div class="page">
 					<paper-toolbar>
 						<paper-icon-button slot="top" on-tap="close" icon="close"></paper-icon-button>
@@ -96,9 +96,8 @@ Dialog with which the user can filter the result set
 						</template>
 					</iron-list>
 				</div>
-    		</template>
-
-    		<template is="dom-if" if="{{_selectedFilter}}">
+			</template>
+			<template is="dom-if" if="{{_selectedFilter}}">
 				<div class="page">
 					<paper-toolbar>
 						<paper-icon-button slot="top" icon="arrow-back" on-tap="_tapSelectValues"></paper-icon-button>
