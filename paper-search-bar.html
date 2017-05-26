@@ -76,7 +76,9 @@ Bar in which the user can enter search terms and filter
 			<paper-icon-button icon="clear" on-tap="_clear" class="icon"></paper-icon-button>
     	</template>
     	<template is="dom-if" if="{{!hideFilterButton}}">
-			<paper-icon-button id="filter" icon="image:tune" on-tap="_filter" class="icon" disabled="[[disableFilterButton]]"></paper-icon-button>
+			<template is="dom-if" if="{{!disableFilterButton}}">
+				<paper-icon-button id="filter" icon="image:tune" on-tap="_filter" class="icon"></paper-icon-button>
+			</template>
 			<paper-badge for="filter" label="[[nrSelectedFilters]]" class="badge" hidden$="[[!nrSelectedFilters]]"></paper-badge>
 		</template>
 	</template>
