@@ -68,8 +68,9 @@ Bar in which the user can enter search terms and filter
 
 		<div class="input-panel flex">
 			<iron-icon icon="[[icon]]" class="icon"></iron-icon>
-			<iron-input id="input" class="flex">
-				<input placeholder="[[placeholder]]"></input>
+			<iron-input id="input" class="flex" bind-value="{{query}}">
+				<!-- Define is="iron-input" for backwards compatibility with Polymer 1.x -->
+				<input is="iron-input" placeholder="[[placeholder]]" value="{{value::input}}"></input>
 			</iron-input>
 		</div>
 		<template is="dom-if" if="{{query}}">
