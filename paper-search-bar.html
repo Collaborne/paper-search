@@ -68,8 +68,8 @@ Bar in which the user can enter search terms and filter
 
 		<div class="input-panel flex">
 			<iron-icon icon="[[icon]]" class="icon"></iron-icon>
-			<iron-input id="input" bind-value="{{query}}" class="flex">
-				<input placeholder="[[placeholder]]">
+			<iron-input id="input" class="flex">
+				<input placeholder="[[placeholder]]"></input>
 			</iron-input>
 		</div>
 		<template is="dom-if" if="{{query}}">
