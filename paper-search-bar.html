@@ -24,18 +24,18 @@ Bar in which the user can enter search terms and filter
 				background: var(--background-color, white);
 				display: block;
 				padding: 0 16px;
-				@apply(--layout-horizontal);
-				@apply(--layout-center);
+				@apply --layout-horizontal;
+				@apply --layout-center;
 			}
 
 			.input-panel {
-				@apply(--layout-horizontal);
-				@apply(--layout-center);
+				@apply --layout-horizontal;
+				@apply --layout-center;
 			}
 
 			.icon {
 				color: var(--disabled-text-color);
-				@apply(--icon-styles);
+				@apply --icon-styles;
 			}
 
 			#input {
@@ -44,7 +44,7 @@ Bar in which the user can enter search terms and filter
 				cursor: text;
 				background: transparent;
 				color: inherit;
-				@apply(--input-styles);
+				@apply --input-styles;
 			}
 
 			input {
@@ -53,7 +53,7 @@ Bar in which the user can enter search terms and filter
 			}
 
 			#input[disabled] {
-				@apply(--disabled-input-styles);
+				@apply --disabled-input-styles;
 			}
 
 			.badge {
