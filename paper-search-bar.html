@@ -25,13 +25,9 @@ Bar in which the user can enter search terms and filter
 				display: block;
 				padding: 0 16px;
 				@apply --layout-horizontal;
-				min-height: 48px;
-			}
-
-			.input-panel {
-				@apply --layout-flex;
-				@apply --layout-horizontal;
 				@apply --layout-center-center;
+				min-height: 48px;
+				box-sizing: border-box;
 			}
 
 			iron-input {
@@ -65,18 +61,17 @@ Bar in which the user can enter search terms and filter
 				--paper-badge-opacity: 1;
 				--paper-badge-width: 18px;
 				--paper-badge-height: 18px;
-				--paper-badge-margin-left: -15px;
-				--paper-badge-margin-bottom: -15px;
+				--paper-badge-margin-left: -5px;
+				--paper-badge-margin-bottom: -25px;
 			}
 		</style>
 
-		<div class="input-panel">
-			<iron-icon icon="[[icon]]" class="icon"></iron-icon>
-			<iron-input bind-value="{{query}}">
-				<!-- Define is="iron-input" for backwards compatibility with Polymer 1.x -->
-				<input id="input" is="iron-input" placeholder="[[placeholder]]" value="{{value::input}}"></input>
-			</iron-input>
-		</div>
+		<iron-icon icon="[[icon]]" class="icon"></iron-icon>
+		<iron-input bind-value="{{query}}">
+			<!-- Define is="iron-input" for backwards compatibility with Polymer 1.x -->
+			<input id="input" is="iron-input" placeholder="[[placeholder]]" value="{{value::input}}"></input>
+		</iron-input>
+
 		<template is="dom-if" if="{{query}}">
 			<paper-icon-button icon="clear" on-tap="_clear" class="icon"></paper-icon-button>
 		</template>
