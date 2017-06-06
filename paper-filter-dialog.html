@@ -32,6 +32,10 @@ Dialog with which the user can filter the result set
 				--app-toolbar-background: var(--paper-filter-toolbar-background);
 			}
 
+			paper-button {
+				font-size: initial;
+			}
+
 			.dialog,.page {
 				@apply --layout-fit;
 			}
@@ -81,7 +85,7 @@ Dialog with which the user can filter the result set
 						<paper-icon-button on-tap="close" icon="close"></paper-icon-button>
 						<span main-title></span>
 						<paper-button on-tap="_tapReset" class="reset" hidden$="[[!_hasSelectedFilters(_selectedFilters)]]">[[resetButton]]</paper-button>
-						<paper-button  on-tap="_tapApply" dialog-confirm>[[saveButton]]</paper-button>
+						<paper-button on-tap="_tapApply" dialog-confirm>[[saveButton]]</paper-button>
 					</app-toolbar>
 
 					<iron-list items="[[filters]]" as="filter" class="list">
