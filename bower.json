@@ -36,7 +36,7 @@
     "paper-ripple": "PolymerElements/paper-ripple#^2.0.0",
     "paper-spinner": "PolymerElements/paper-spinner#^2.0.0",
     "paper-styles": "PolymerElements/paper-styles#^2.0.0",
-    "paper-more-button": "Collaborne/paper-more-button#^1.0.0"
+    "paper-more-button": "Collaborne/paper-more-button#^2.0.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^2.0.0",
