@@ -1,26 +1,25 @@
-_[Demo and API Docs](http://collaborne.github.io/paper-search)_
-
-paper-search [![Bower version](https://badge.fury.io/bo/paper-search.svg)](http://badge.fury.io/bo/paper-search) [![Travis state](https://travis-ci.org/Collaborne/paper-search.svg?branch=master)](https://travis-ci.org/Collaborne/paper-search)
+paper-search [![Bower version](https://badge.fury.io/bo/paper-search.svg)](http://badge.fury.io/bo/paper-search) [![Travis state](https://travis-ci.org/Collaborne/paper-search.svg?branch=master)](https://travis-ci.org/Collaborne/paper-search) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/Collaborne/paper-search)
 =========
 
 `paper-search` provides components for a Material Design [search](https://www.google.com/design/spec/patterns/search.html). The web components are built with [Polymer](https://www.polymer-project.org).
 
-Screenshot: Search Panel
-
-![Screenshot: Panel](/doc/search-panel-screenshot.png "Screenshot: Panel")
-
-Screenshot: Select filter from Filtering Dialog
-
-![Screenshot: Filter dialog - filters](/doc/filter-dialog-filters-screenshot.png "Screenshot: Filter dialog - filters")
-
-Screenshot: Select values from Filtering Dialog
-
-![Screenshot: Filter dialog - values](/doc/filter-dialog-values-screenshot.png "Screenshot: Filter dialog - values")
-
-
 To use these elements:
 
 `bower install paper-search`
+
+<!--
+```
+<custom-element-demo>
+  <template>
+    <link rel="import" href="paper-search-panel.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+<paper-search-panel></paper-search-panel>
+```
 
 
 ## License
