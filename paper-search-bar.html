@@ -64,6 +64,10 @@ Bar in which the user can enter search terms and filter
 				--paper-badge-margin-left: -5px;
 				--paper-badge-margin-bottom: -25px;
 			}
+
+			.badge[invisible] {
+				visibility: hidden;
+			}
 		</style>
 
 		<iron-icon icon="[[icon]]" class="icon"></iron-icon>
@@ -79,7 +83,7 @@ Bar in which the user can enter search terms and filter
 			<template is="dom-if" if="{{!disableFilterButton}}">
 				<paper-icon-button id="filter" icon="image:tune" on-tap="_filter" class="icon"></paper-icon-button>
 			</template>
-			<paper-badge for="filter" label="[[nrSelectedFilters]]" class="badge" hidden$="[[!nrSelectedFilters]]"></paper-badge>
+			<paper-badge for="filter" label="[[nrSelectedFilters]]" class="badge" invisible$="[[!nrSelectedFilters]]"></paper-badge>
 		</template>
 	</template>
 </dom-module>
