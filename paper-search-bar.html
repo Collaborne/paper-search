@@ -51,6 +51,9 @@ Bar in which the user can enter search terms and filter
 				border: 0;
 				outline: 0;
 			}
+			#input::-ms-clear {
+				display: none;
+			}
 
 			#input[disabled] {
 				@apply --disabled-input-styles;
