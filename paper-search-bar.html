@@ -25,15 +25,14 @@ Bar in which the user can enter search terms and filter
 				padding: 0 16px;
 				@apply --layout-horizontal;
 				@apply --layout-center-center;
-				min-height: 48px;
-				max-height: 48px;
-				height: 0px; /* To resolve `min-height` bug on IE 11 */
+				height: var(--paper-search-bar-height, 48px); /* To resolve `min-height` bug on IE 11 */
 				box-sizing: border-box;
 			}
 
 			iron-input {
 				@apply --layout-flex;
 				@apply --layout-vertical;
+				height: 100%; /* To resolve `min-height` bug on IE 11 */
 			}
 
 			.icon {
