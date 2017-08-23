@@ -20,6 +20,10 @@ Bar in which the user can enter search terms and filter
 	<template>
 		<style>
 			:host {
+				display: block;
+			}
+
+			.horizontal-holder {
 				background: var(--background-color, white);
 				display: block;
 				padding: 0 16px;
@@ -73,21 +77,23 @@ Bar in which the user can enter search terms and filter
 			}
 		</style>
 
-		<iron-icon icon="[[icon]]" class="icon"></iron-icon>
-		<iron-input bind-value="{{query}}">
-			<!-- Define is="iron-input" for backwards compatibility with Polymer 1.x -->
-			<input id="input" is="iron-input" placeholder="[[placeholder]]" value="{{value::input}}"></input>
-		</iron-input>
+		<div class="horizontal-holder">
+			<iron-icon icon="[[icon]]" class="icon"></iron-icon>
+			<iron-input bind-value="{{query}}">
+				<!-- Define is="iron-input" for backwards compatibility with Polymer 1.x -->
+				<input id="input" is="iron-input" placeholder="[[placeholder]]" value="{{value::input}}"></input>
+			</iron-input>
 
-		<template is="dom-if" if="{{query}}">
-			<paper-icon-button icon="clear" on-tap="_clear" class="icon"></paper-icon-button>
-		</template>
-		<template is="dom-if" if="{{!hideFilterButton}}">
-			<template is="dom-if" if="{{!disableFilterButton}}">
-				<paper-icon-button id="filter" icon="image:tune" on-tap="_filter" class="icon"></paper-icon-button>
+			<template is="dom-if" if="{{query}}">
+				<paper-icon-button icon="clear" on-tap="_clear" class="icon"></paper-icon-button>
 			</template>
-			<paper-badge for="filter" label="[[nrSelectedFilters]]" class="badge" invisible$="[[!nrSelectedFilters]]"></paper-badge>
-		</template>
+			<template is="dom-if" if="{{!hideFilterButton}}">
+				<template is="dom-if" if="{{!disableFilterButton}}">
+					<paper-icon-button id="filter" icon="image:tune" on-tap="_filter" class="icon"></paper-icon-button>
+				</template>
+				<paper-badge for="filter" label="[[nrSelectedFilters]]" class="badge" invisible$="[[!nrSelectedFilters]]"></paper-badge>
+			</template>
+		</div>
 	</template>
 </dom-module>
 
