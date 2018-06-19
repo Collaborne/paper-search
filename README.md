@@ -1,4 +1,7 @@
 paper-search [![Bower version](https://badge.fury.io/bo/paper-search.svg)](http://badge.fury.io/bo/paper-search) [![Travis state](https://travis-ci.org/Collaborne/paper-search.svg?branch=master)](https://travis-ci.org/Collaborne/paper-search) [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/Collaborne/paper-search)
+  
+[![Published on Vaadin  Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/Collabornepaper-search)
+[![Stars on vaadin.com/directory](https://img.shields.io/vaadin-directory/star/Collabornepaper-search.svg)](https://vaadin.com/directory/component/Collabornepaper-search)
 =========
 
 `paper-search` provides components for a Material Design [search](https://www.google.com/design/spec/patterns/search.html). The web components are built with [Polymer](https://www.polymer-project.org).
