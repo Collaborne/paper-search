@@ -17,4 +17,4 @@ before_script:
 - $(npm bin)/bower install
 - $(npm bin)/polylint --no-recursion
 script:
-- xvfb-run $(npm bin)/wct
+- LAUNCHPAD_BROWSERS=firefox xvfb-run $(npm bin)/wct
